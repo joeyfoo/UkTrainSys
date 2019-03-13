@@ -1,0 +1,2182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>Railsimroutes.net - [UK Train System Plugin (Downloads)]</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style type="text/css">
+		body {
+			margin: 0px auto 0px auto;
+			max-width: 1024px;
+			padding-left:8px;
+			padding-right: 8px;
+			font-family: "segoe ui", "trebuchet ms", arial, helvetica, tahoma, sans-serif;
+		}
+		div.header {
+			background-color: #4444bb;
+			color: #ffee44;
+			font-size: 0.9em;
+			text-align: center;
+		}
+		h3 {
+			border-bottom:1px solid #000000;
+			margin-top: 30px;
+		}
+		li.sub-section {
+			list-style-type:none;
+		}
+		tt {
+			font-size: 1.0em;
+			font-style: italic;
+			color: #990000;
+			font-family: "consolas", "courier new", monospace;
+		}
+		.table-ats-subjects {
+			border-collapse: collapse;
+			border-top:1px solid #555555;
+			border-bottom:1px solid #555555;
+			font-size: 0.95em;
+		}
+		.table-ats-subjects th {
+			background-color: #ffdd88;
+			border-bottom:1px solid #555555;
+			padding: 1px;
+			text-align: left;
+			font-size: 0.9em;
+			font-weight: bold;
+		}
+		.table-ats-subjects tbody {
+			background-color: #fafae9;
+		}
+		.table-ats-subjects td {
+			vertical-align: top;
+			padding: 1px;
+			border-bottom:1px dotted #aaaaaa;
+		}
+		.table-ats-subjects td.column-1 {
+			text-align: left;
+			text-decoration: italic;
+			padding-left: 5px;
+		}
+		.table-data {
+			border-collapse: collapse;
+			border-top:1px solid #555555;
+			border-bottom:1px solid #555555;
+			font-size: 0.95em;
+		}
+		.table-data th {
+			background-color: #ffddcc;
+			border-bottom:1px solid #555555;
+			padding: 1px;
+			text-align: left;
+			font-size: 0.9em;
+			font-weight: bold;
+		}
+		.table-data tbody {
+			background-color: #fff2f2;
+		}
+		.table-data td {
+			vertical-align: top;
+			padding: 1px;
+			border-bottom:1px dotted #aaaaaa;
+		}
+		.table-data td.column-1 {
+			text-align: left;
+			text-decoration: italic;
+			padding-left: 5px;
+		}
+		div.codebox-shadow {
+			width: 600px;
+			background-color:#bbbbbb;
+			position: relative;
+			left: 3px;
+			top: 3px;
+			margin-left:20px;
+			margin-right:15px;
+		} 
+		div.codebox-shadow-content {
+			background-color: #ffffdd;
+			position: relative;
+			left: -3px;
+			top: -3px;
+			border: 1px dashed #808080;
+			padding: 4px 6px 4px 6px;
+			font-family: "consolas", "courier new", monospace;
+			font-size: 0.8em;
+		}
+    </style>
+</head>
+<body id="top">
+<div class="header">
+	<h2><span style="white-space: nowrap;">Release notes for the UK Train System</span> <span style="white-space: nowrap;">Cross-platform.NET Plugin for openBVE</span><br />
+	(UkTrainSys.dll)</h2>
+</div>
+<div style="margin-left: 5px;">
+	<strong>Plugin version:</strong> 0.3.1.9<br />
+	<strong>Author:</strong> Anthony Bowden<br />
+	<strong>Project homepage:</strong> <a href="http://railsimroutes.net/libraries/uktrainsys/">http://railsimroutes.net/libraries/uktrainsys/</a><br />
+	<strong>Target simulator:</strong> <a href="http://openbve.trainsimcentral.co.uk/">openBVE v1.2.9.2x</a> upwards<br />
+	<strong>Target CLI:</strong> Microsoft .NET 2.0 / Mono 2.x<br />
+	<strong>Usage and redistribution:</strong> Open source (public domain, no conditions - credit appreciated though)<br />
+	<br />
+</div>
+<div>
+	<h3>Contents</h3>
+	<ul>
+		<li><a href="#introduction">Introduction</a></li>
+		<li class="sub-section">
+			<ul>
+				<li><a href="#note-for-train-developers">Note for openBVE train developers</a></li>
+			</ul>
+		</li>
+		<li><a href="#features">Plugin features (current and planned)</a></li>
+		<li><a href="#starting-states">Starting states</a></li>
+		<li><a href="#plugin-variables">Plugin variables for train developers</a></li>
+		<li class="sub-section">
+			<ul>
+				<li><a href="#plugin-variables-general">General controls and safety systems</a></li>
+				<li><a href="#plugin-variables-ai-support">AI Support</a></li>
+				<li><a href="#plugin-variables-sounds">Sound variables</a></li>
+			</ul>
+		</li>
+		<li><a href="#virtual-key-assignments">Virtual key assignments for train developers and users</a></li>
+		<li><a href="#beacon-types">Beacon types for route developers</a></li>
+		<li class="sub-section">
+			<ul>
+				<li><a href="#beacon-types-more-info">More information</a></li>
+				<li><a href="#beacon-types-note-backwards-compatibility">A note regarding backwards compatiblity</a></li>
+				<li><a href="#beacon-types-apc">Beacon types and the Automatic Power Control system</a></li>
+				<li><a href="#beacon-types-ai-guard">Beacon types and the AI Guard</a></li>
+				<li><a href="#beacon-types-ai-support">Beacon types and the AI Support feature</a></li>
+				<li><a href="#beacon-types-aws">Beacon types and the Automatic Warning System (AWS)</a></li>
+				<li><a href="#beacon-types-tpws">Beacon types and the Train Protection and Warning System (TPWS)</a></li>
+				<li class="sub-section">
+					<ul>
+						<li><a href="#beacon-types-tpws-advanced-developers-only">For advanced developers - interleaving and nesting TPWS induction loops</a></li>
+					</ul>
+				</li>
+				<li><a href="#beacon-types-legacy-behaviour">Beacon Types and Legacy behaviour</a></li>
+			</ul>
+		</li>
+		<li><a href="#config-file">The UkTrainSys configuration file</a></li>
+		<li><a href="#information-programmers">Information for programmers</a></li>
+		<li class="sub-section">
+			<ul>
+				<li><a href="#information-programmers-general-design">General design principle summary</a></li>
+				<li><a href="#information-programmers-cab-controls">Cab Controls class</a></li>
+				<li><a href="#information-programmers-safety-systems">Safety System classes</a></li>
+				<li><a href="#information-programmers-interlock-manager">Interlock Manager</a></li>
+				<li><a href="#information-programmers-power-supplies">Power supply classes</a></li>
+				<li><a href="#information-programmers-sound-playback">Sound playback</a></li>
+				<li><a href="#information-programmers-offset-beacon-manager">Offset Beacon Receiver Manager class</a></li>
+				<li><a href="#information-programmers-source-code">Source Code</a></li>
+			</ul>
+		</li>
+	</ul>
+	<br />
+	<br />
+</div>
+<div>
+	<a id="introduction"></a>
+	<h3>Introduction</h3>
+	The new UK Train System cross-platform .NET plugin (UkTrainSys.dll) is designed for use with UK mainline trains developed for <a href="http://openbve.trainsimcentral.co.uk">openBVE</a>. The inspiration behind the development of this plugin, is odakyufan's plugin for his <a href="http://odakyufan.uuuq.com/">Chashinai Railway</a> project, as well as Simon Gathercole's previous generation of
+	UKXXx.dll range of plugins for BVE 4. This new plugin is designed specifically for openBVE and written in C#, is cross-platform
+	compatible, features the functionality of diesel and electric trains in a single assembly, and will feature more sophisticated simulation once the project develops further. This new plugin is also open source, as well as being released into the public domain.<br />
+	<br />
+	<strong><em>Please note that this project is ongoing</em></strong>. This is an alpha version of the plugin, and this early version is intended primarily for testing and feedback from train developers, but anyone is welcome to give it a try, and non-Windows users of openBVE can also now benefit from plugin functionality with UK electric and diesel-eletric trains (to begin with).<br />
+	<br />
+	This plugin is designed to be modular, and aims to simulate the major systems found in a range of UK trains in a realistic way, including the Automatic Warning System, Train Protection and Warning System, Driver Reminder Appliance, the Vigilance Device, and so-on. A simple AI guard is included, along with AI Support, which enables the plugin to assist openBVE's built-in AI human driver in automatically handling systems simulated by the plugin. Animations relating to the AI driver's interactions with cab controls are supported, as well. A range of power supplies are also simulated, including a battery, overhead supply, and a diesel engine. Other features, such as windscreen wipers and failure modes, will follow later.<br />
+	<br />
+	<a id="note-for-train-developers"></a><strong>Note for openBVE train developers:</strong><br />
+	<br />
+	If you are an openBVE train developer and decide to use the UkTrainSys plugin, then if you wish, you can <a href="http://railsimroutes.net/contact.php">contact me</a> to let me know, and I can then let you know whenever the plugin is updated.<br />
+	<br />
+	Trains which use Simon Gathercole's UKMUt.dll, or UKSpt.dll, can use UkTrainSys.dll instead, although some configuration changes may be necessary with the train in question (especially with regard to the guard's buzzer).<br />
+	<br />
+	The development of this plugin is an ongoing project, and sometimes I might make changes which require your train to be updated. I'm not able to develop your train for you, but if a change to the plugin means that your train needs to be updated in order to continue working correctly, you can contact me for assistance, or I can make any necessary configuration changes for you, if necessary. :-)<br />
+	<br />
+</div>
+<div>
+	<a id="features"></a>
+	<h3>Plugin features (current and planned)</h3>
+	Current feature summary:
+	<ul>
+		<li>Automatic Warning System (AWS);</li>
+		<li>Train Protection and Warning System (TPWS) - Standard and Plus;</li>
+		<li>Driver Reminder Appliance (DRA);</li>
+		<li>Vigilance Device with reduced cycle time option;</li>
+		<li>Traction and brake interlocks;</li>
+		<li>Battery which can be discharged, recharged and overloaded;</li>
+		<li>Overhead supply, including neutral sections;</li>
+		<li>Pantograph, including ACB/VCB;</li>
+		<li>Automatic Power Control;</li>
+		<li>Power supply and electrical system circuit breakers (for future use);</li>
+		<li>Diesel engine support, with starter motor/shutdown and randomised engine stalls;</li>
+		<li>In-cab blower;</li>
+		<li>Head and tail lights;</li>
+		<li>AI guard for station stop monitoring and buzzer signals;</li>
+		<li>AI Support which assists openBVE's AI human driver in automatically handling systems simulated by the plugin
+			(including support for visible in-cab driver's hands and arms).</li>
+	</ul>
+	Planned feature summary:
+	<ul>
+		<li>Windscreen wipers and rain effects;</li>
+		<li>Overhead supplies catering for different supply voltages;</li>
+		<li>More advanced diesel engine simulation;</li>
+		<li>Continuous Automatic Warning System (CAWS) support</li>
+		<li>Third rail power supply support;</li>
+		<li>Tap-changer support;</li>
+		<li>ERTMS/ETCS support;</li>
+		<li>ATP support;</li>
+		<li>RETB support;</li>
+		<li>Tripcock support;</li>
+		<li>Random failure modes.</li>
+	</ul>
+	<br />
+	<br />
+</div>
+<div>
+	<a id="starting-states"></a>
+	<h3>Starting states</h3>
+	openBVE supports three modes in which the state of the safety systems can be set upon starting a route. This is achieved via the <tt>Route.Change</tt> command, specified within a route file. Please see the <a href="http://openbve.trainsimcentral.co.uk/develop/index.html">Developing for openBVE</a> section of the official openBVE homepage for more information.<br />
+	<br />
+	The UkTrainSys plugin behaviour more closely matches openBVE's mode setting.<br />
+	<br />
+	<strong>If <tt>Mode</tt> is <span style="color: #008800">-1</span>:</strong> The train is already in service, the traction power supply is active (for example, the pantograph is raised), and the safety systems are already initialised and ready. The Driver Reminder Appliance (DRA) needs to be deactivated, however.<br />
+	<br />
+	<strong>If <tt>Mode</tt> is <span style="color: #008800">0</span>:</strong> The traction power supply is active (e.g. pantograph raised), but the safety systems need to be initialised by turning the Master Switch on, and performing the startup/self-test procedure.<br />
+	<br />
+	<strong>If <tt>Mode</tt> is <span style="color: #008800">1</span>:</strong> Then the traction power supply is NOT active (e.g. the pantograph is lowered), and the safety systems need to be initialised by turning the Master Switch on, and performing the startup/self-test procedure.
+	<br />
+	<br />
+</div>
+<div>
+	<a id="plugin-variables"></a>
+	<h3>Plugin variables (ats subjects) for train developers</h3>
+	The following is a list of the plugin variables and associated values, which are currently supported by the UkTrainSys.dll plugin. Plugin variables can be queried for use with animated 3D cabs (defined via the panel.animated file), or when being used with BVE 4-style 2D panels (defined via the panel2.cfg file) - in this latter case, plugin variables are referred referred to as "ats subjects". These variables can be used in the following ways:<br />
+	<br />
+	Example: <em>panel.animated</em> file<br />
+	<br />
+	<div class="codebox-shadow">
+		<div class="codebox-shadow-content">
+			[Object]<br />
+			States = my_folder\my_object_0.csv, my_folder\my_object_1.csv<br />
+			StateFunction = pluginState[201]
+		</div>
+	</div>
+	<br />
+	In the above example, if the value assigned to <tt>pluginState[201]</tt> equals 0, then state 0 (<em>my_object_0.csv</em>) is displayed. If the value assigned to <tt>pluginState[201]</tt> equals 1, then state 1 (<em>my_object_1.csv</em>) is displayed instead. If the value assigned to <tt>pluginState[201]</tt> equals a value less than 0, or greater than 1, then no object is displayed at all (as there are no objects associated with those state values).<br />
+	<br />
+	Example: <em>panel2.cfg</em> file<br />
+	<br />
+	<div class="codebox-shadow">
+		<div class="codebox-shadow-content">
+			[Pilotlamp]<br />
+			Subject = ats7<br />
+			DaytimeImage = d3d\AWS_sunflower.bmp
+		</div>
+	</div>
+	<br />
+	In the above example, if the value assigned to <tt>ats7</tt> (equivalent to <tt>pluginState[7]</tt>) equals 1, then <em>AWS_sunflower.bmp</em> is displayed. If the value assigned to <tt>ats7</tt> equals any other value, then no texture is displayed.<br />
+	<br />
+	<a id="plugin-variables-general"></a>
+	General controls and safety systems:<br />
+	<br />
+	<table style="width: 100%; text-align: center;">
+		<tr>
+			<td style="width: 25%;">
+			</td>
+			<td>
+				<table class="table-ats-subjects" style="width: 700px; text-align: left;">
+					<thead>
+						<tr>
+							<th style="width: 125px"><span style="white-space: nowrap">Plugin variable<br />
+							(pluginState[<em>i</em>])</span>
+							</th>
+							<th style="width: 100px"><span style="white-space: nowrap">Values</span>
+							</th>
+							<th style="width: 475px"><span style="white-space: nowrap">Description</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								0 <span style="color: #ff0000"><em>(deprecated)</em></span></td>
+							<td>
+								0 - 1</td>
+							<td>
+								= 1 when the master switch is <em>off</em></td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 100px">
+								1</td>
+							<td>
+								0 - 1</td>
+							<td style="width: 475px">
+								= 1 when the master switch is <em>on</em></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								&nbsp;</td>
+							<td>
+							</td>
+							<td>
+							</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 100px">
+								3</td>
+							<td>
+								0 - 1</td>
+							<td style="width: 475px">
+								= 1 when the diesel engine is <em>running</em></td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 100px">
+								4</td>
+							<td>
+								0 - 3</td>
+							<td style="width: 475px">
+								> 0 depending upon whether the diesel engine starter button<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is <em>depressed</em>, or the starter motor is <em>running</em><br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[= 0: button released, starter motor off |<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 1: button depressed, starter motor off |<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 2: button released, starter motor running |<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 3 button depressed, starter motor running]</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 100px">
+								5</td>
+							<td>
+								0 - 3</td>
+							<td style="width: 475px">
+								> 0 depending upon whether the diesel engine stop button<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is <em>depressed</em>, or the engine is <em>stopped</em><br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[= 0: button released, engine running |<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 1: button depressed, engine running |<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 2: button released, engine stopped |<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 3 button depressed, engine stopped]</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								6 <span style="color: #ff0000"><em>(deprecated)</em></span></td>
+							<td>
+								0 - 1</td>
+							<td>
+								= 1 when the AWS sunflower is <em>not visible</em></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								7</td>
+							<td>
+								0 - 1</td>
+							<td>
+								= 1 when the AWS sunflower is <em>visible</em></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								8</td>
+							<td>
+								0 - 1</td>
+							<td>
+								= 1 while the AWS reset button is <em>depressed</em></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								9</td>
+							<td>
+								0 - 1</td>
+							<td>
+								= 1 when the TPWS Brake Demand indicator should be <em>illuminated</em></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								10</td>
+							<td>
+								0 - 1</td>
+							<td>
+								= 1 when the TPWS Isolation indicator should be <em>illuminated</em></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								11</td>
+							<td>
+								0 - 1</td>
+							<td>
+								= 1 when the TPWS TSS Override indicator should be <em>illuminated</em></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								&nbsp;</td>
+							<td>
+								</td>
+							<td>
+								</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								13</td>
+							<td>
+								0 - 1</td>
+							<td>
+								= 1 when the DRA is <em>activated</em></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								14</td>
+							<td>
+								0 - 1</td>
+							<td>
+								= 1 when the door interlock/hazard indicator should be <em>illuminated</em></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								15</td>
+							<td>
+								0 - 1</td>
+							<td>
+								= 1 when the left doors are <em>open</em></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								16</td>
+							<td>
+								0 - 1</td>
+							<td>
+								= 1 when the right doors are <em>open</em></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								&nbsp;</td>
+							<td>
+								</td>
+							<td>
+								</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								20</td>
+							<td>
+								0 - 3</td>
+							<td>
+								&gt; 0 when the headlight rotary switch is <em>not in the off</em> position<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[= 0: off | = 1: day | = 2: marker only | = 3: night]</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								21</td>
+							<td>
+								0 - 1</td>
+							<td>
+								= 1 when the taillight switch is in the <em>on</em> position</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								22</td>
+							<td>
+								0 - 3</td>
+							<td>
+								&gt; 0 when the headlight proving indicators are <em>illuminated</em><br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[= 0: off | = 1: day | = 2: marker only | = 3: night]</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								23</td>
+							<td>
+								0 - 1</td>
+							<td>
+								= 1 when the taillight proving indicators are <em>illuminated</em></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								24</td>
+							<td>
+								0 - 2</td>
+							<td>
+								&gt; 0 when the horn lever is <em>not in the forward</em> position<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[= 0: forward | = 1: centred | = 2: backward]</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								25 <span style="color: #008800"><em>(new)</em></span></td>
+							<td>
+								0 - 1</td>
+							<td>
+								= 1 while the guard's buzzer is <em>playing</em></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								&nbsp;</td>
+							<td>
+								</td>
+							<td>
+								</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								30</td>
+							<td>
+								0 - 1</td>
+							<td>
+								= 1 when the pantograph is <em>raised</em></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								31</td>
+							<td>
+								0 - 1</td>
+							<td>
+								= 1 when the line volts indicator is <em>illuminated</em></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								&nbsp;</td>
+							<td>
+								</td>
+							<td>
+								</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								33</td>
+							<td>
+								0 - 1</td>
+							<td>
+								= 1 when the vacuum circuit breaker indicator is <em>illuminated</em></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								&nbsp;</td>
+							<td>
+								</td>
+							<td>
+								</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								65</td>
+							<td>
+								0 - 5</td>
+							<td>
+								> 0 when the BR 8x series power handle is not in the <em>off</em> position<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[= 0: off | = 1: run down | = 2: notch down |<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 3: hold | = 4: notch up | = 5: run up]</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								&nbsp;</td>
+							<td>
+								</td>
+							<td>
+								</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								198</td>
+							<td>
+								0 - 1</td>
+							<td>
+								&gt; 0 when the wiper rotary switch is <em>not in the off</em> position<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[= 0: off | = 1: slow | = 2: fast]</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								199</td>
+							<td>
+								0</td>
+							<td>
+								(<em>Reserved for the wiper position</em>)</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								[200-256 ↓]</td>
+							<td>
+								-</td>
+							<td>
+								 (<em>Not implemented yet - range reserved for raindrops</em>)</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+			<td style="width: 25%;">
+			</td>
+		</tr>
+	</table>
+	<br />
+	<br />
+	<a id="plugin-variables-ai-support"></a>
+	AI Support:<br />
+	<br />
+	<table style="width: 100%; text-align: center;">
+		<tr>
+			<td style="width: 25%;">
+			</td>
+			<td>
+				<table class="table-ats-subjects" style="width: 700px; text-align: left;">
+					<thead>
+						<tr>
+							<th style="width: 125px"><span style="white-space: nowrap">Plugin variable<br />
+							(pluginState[<em>i</em>])</span>
+							</th>
+							<th style="width: 100px"><span style="white-space: nowrap">Values</span>
+							</th>
+							<th style="width: 475px"><span style="white-space: nowrap">Description</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								50</td>
+							<td style="width: 100px">
+								0 - 1</td>
+							<td style="width: 475px">
+								= 1 when the AI driver's arms/hands are <em>visible</em> (global setting)</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								51</td>
+							<td style="width: 100px">
+								0 - 1</td>
+							<td style="width: 475px">
+								= 1 when the AI driver's arm/hand animation states have been<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;<em>initialised</em> (use this with a null object, to show an invisible<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;object while the animated object is being positioned upon<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;being first displayed)</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								52</td>
+							<td>
+								0 - 7</td>
+							<td>
+								&gt; 0 when the AI driver's left hand is <em>interacting</em> with an in-cab control<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 0: no interaction / transitioning to another control / not visible<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 1: interacting with the power handle<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 2: interacting with the reverser handle<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 3: interacting with the headlight switch<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 4: interacting with the taillight switch<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 5: interacting with the pantograph up/reset button<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 6: interacting with the pantograph down button<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 7: interacting with the guard's buzzer button</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								53</td>
+							<td>
+								0 - 3</td>
+							<td>
+								&gt; 0 when the AI driver's right hand is <em>interacting</em> with an in-cab control<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 0: no interaction / transitioning to another control / not visible<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 1: interacting with the AWS reset button<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 2: interacting with the DRA switch<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 3: interacting with the horn lever</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+			<td style="width: 25%;">
+			</td>
+		</tr>
+	</table>
+	<br />
+	<br />
+	<a id="plugin-variables-sounds"></a>
+	Sound variables:<br />
+	<br />
+	<table style="width: 100%; text-align: center;">
+		<tr>
+			<td style="width: 25%;">
+			</td>
+			<td>
+				<table class="table-ats-subjects" style="width: 700px; text-align: left;">
+					<thead>
+						<tr>
+							<th style="width: 125px"><span style="white-space: nowrap">Sound variable<br />
+							(sound.cfg)</span>
+							</th>
+							<th style="width: 575px"><span style="white-space: nowrap">Description</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								0</td>
+							<td style="width: 575px">
+								The AWS "bing" (clear) sound</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								1</td>
+							<td style="width: 575px">
+								The shortened AWS bing sound (self-test complete)</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								2</td>
+							<td style="width: 575px">
+								The AWS horn sound (loops)</td>
+						</tr><tr>
+							<td class="column-1" style="width: 125px">
+								3</td>
+							<td style="width: 575px">
+								The vigilance device beep sound (loops)</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								4</td>
+							<td style="width: 575px">
+								The single buzzer sound</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								&nbsp;</td>
+							<td>
+								</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								7</td>
+							<td style="width: 575px">
+								The diesel engine starter motor switching on sound</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								8</td>
+							<td style="width: 575px">
+								The diesel engine starter motor sound (loops)</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								9</td>
+							<td style="width: 575px">
+								The diesel engine starter motor running down sound</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								10</td>
+							<td style="width: 575px">
+								The diesel engine start sound</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								11</td>
+							<td style="width: 575px">
+								The diesel engine stall on start sound</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								12</td>
+							<td style="width: 575px">
+								The diesel engine idling sound (loops)</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								13</td>
+							<td style="width: 575px">
+								The diesel engine revving up sound</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								14</td>
+							<td style="width: 575px">
+								The diesel engine revving down sound</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								15</td>
+							<td style="width: 575px">
+								The diesel engine stopping sound</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								16</td>
+							<td style="width: 575px">
+								The wiper switch sound</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								17</td>
+							<td style="width: 575px">
+								(<em>Not implemented yet - reserved for the wiper sweep across wet windscreen sound)</em></td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								18</td>
+							<td style="width: 575px">
+								(<em>Not implemented yet - reserved for the wiper sweep across dry windscreen sound)</em></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								&nbsp;</td>
+							<td>
+								</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								24</td>
+							<td style="width: 575px">
+								The generic switch sound</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								25</td>
+							<td style="width: 575px">
+								The pantograph rising air release sound</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								&nbsp;</td>
+							<td>
+								</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								27</td>
+							<td style="width: 575px">
+								The vacuum circuit breaker "thwok" sound</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								28</td>
+							<td style="width: 575px">
+								(<em>Not implemented yet - reserved for the pantograph head arcing when failing to cut off power through a neutral section sound</em></td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								29</td>
+							<td style="width: 575px">
+								The pantograph sparking sound (on contact with the overhead line)</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								&nbsp;</td>
+							<td>
+								</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								50</td>
+							<td style="width: 575px">
+								The in-cab blower spinning up sound</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								51</td>
+							<td style="width: 575px">
+								The in-cab blower looping sound</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								52</td>
+							<td style="width: 575px">
+								The in-cab blower spinning down sound</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								&nbsp;</td>
+							<td>
+								</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								60</td>
+							<td style="width: 575px">
+								The left doors open recharge clicks sound</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								61</td>
+							<td style="width: 575px">
+								The right doors open recharge clicks sound</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								62</td>
+							<td style="width: 575px">
+								The horn lever pulled backward horn sound (used by the AI support)</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								63</td>
+							<td style="width: 575px">
+								The horn lever pushed forward horn sound (used by the AI support)</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+			<td style="width: 25%;">
+			</td>
+		</tr>
+	</table>
+	<br />
+	<br />
+</div>
+<div>
+	<a id="virtual-key-assignments"></a>
+	<h3>Virtual key assignments for train developers and users</h3>
+	The following virtual key assignments are used by the UkTrainSys plugin:<br />
+	<br />
+	<table style="width: 100%; text-align: center;">
+		<tr>
+			<td style="width: 25%;">
+			</td>
+			<td>
+				<table class="table-ats-subjects" style="width: 700px; text-align: left;">
+					<thead>
+						<tr>
+							<th style="width: 100px"><span style="white-space: nowrap">Virtual Key</span>
+							</th>
+							<th style="width: 150px"><span style="white-space: nowrap">Default keyboard<br />
+								assignment</span>
+							</th>
+							<th style="width: 450px"><span style="white-space: nowrap">Description</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="column-1" style="width: 100px">
+								A1</td>
+							<td style="width: 150px">
+								Insert</td>
+							<td style="width: 450px">
+								The AWS reset button</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								A2</td>
+							<td style="width: 100px">
+								Delete</td>
+							<td style="width: 475px">
+								The DSD pedal (Vigilance device)</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								B1</td>
+							<td style="width: 100px">
+								Home</td>
+							<td style="width: 475px">
+								Wiper switch increase speed</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								B2</td>
+							<td style="width: 100px">
+								End</td>
+							<td style="width: 475px">
+								Wiper switch decrease speed</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								C1</td>
+							<td style="width: 100px">
+								Page Up</td>
+							<td style="width: 475px">
+								TPWS TSS Temporary Override</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								C2</td>
+							<td style="width: 100px">
+								Page Down</td>
+							<td style="width: 475px">
+								TPWS/AWS/Vigilance Temporary Isolation (not prototypical)</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								D</td>
+							<td style="width: 100px">
+								2</td>
+							<td style="width: 475px">
+								Pantograph up/reset or diesel engine starter button</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								E</td>
+							<td style="width: 100px">
+								3</td>
+							<td style="width: 475px">
+								Pantograph down or diesel engine stop button</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								F</td>
+							<td style="width: 100px">
+								4</td>
+							<td style="width: 475px">
+								Headlight rotary switch</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								G</td>
+							<td style="width: 100px">
+								5</td>
+							<td style="width: 475px">
+								Taillight rotary switch</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								H</td>
+							<td style="width: 100px">
+								6</td>
+							<td style="width: 475px">
+								Driver to guard buzzer button</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								I</td>
+							<td style="width: 100px">
+								7</td>
+							<td style="width: 475px">
+								<em>(Not used yet)</em></td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								J</td>
+							<td style="width: 100px">
+								8</td>
+							<td style="width: 475px">
+								<em>(Not used yet)</em></td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								K</td>
+							<td style="width: 100px">
+								9</td>
+							<td style="width: 475px">
+								<em>(Not used yet)</em></td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								L</td>
+							<td style="width: 100px">
+								0</td>
+							<td style="width: 475px">
+								<em>(Not used yet)</em></td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								S</td>
+							<td style="width: 100px">
+								Space</td>
+							<td style="width: 475px">
+								DRA toggle switch</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+			<td style="width: 25%;">
+			</td>
+		</tr>
+	</table>
+	<br />
+	<br />
+</div>
+<div>
+	<a id="beacon-types"></a>
+	<h3>Beacon types for route developers</h3>
+	The following beacon types are recognised by the UkTrainSys plugin (for details regarding how to use each beacon, please see further down):<br />
+	<br />
+	<table style="width: 100%; text-align: center;">
+		<tr>
+			<td style="width: 25%;">
+			</td>
+			<td>
+				<table class="table-ats-subjects" style="width: 700px; text-align: left;">
+					<thead>
+						<tr>
+							<th style="width: 150px"><span style="white-space: nowrap">Beacon Type</span>
+							</th>
+							<th style="width: 550px"><span style="white-space: nowrap">Purpose</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="column-1" style="width: 150px">
+								20</td>
+							<td style="width: 550px">
+								Represents a pair of Automatic Power Control (APC) magnets, or a neutral section, depending upon the optional data parameter</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 150px">
+								23</td>
+							<td style="width: 550px">
+								Used to tell the AI guard whether or not an upcoming station has stopping location constraints which should
+								be observed, or ignored</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								24</td>
+							<td>
+								Used by the AI guard; defines the start (or end) of station limits, and used to determine the location of the
+								upcoming stopping location, and the permitted underrun and overrun distances in metres</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								&nbsp;</td>
+							<td>
+								</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								50</td>
+							<td>
+								Used by the AI Support feature; the optional data determines which AI function to perform upon passing this beacon, or otherwise informs the AI Support of something for it to be aware of</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								&nbsp;</td>
+							<td>
+								</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								44000</td>
+							<td>
+								Represents an AWS permanent magnet or electromagnet</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								44001 <span style="color: #ff0000"><em>(deprecated)</em></span></td>
+							<td style="width: 575px">
+								Represents a permanently installed and energised AWS magnet (for use with permissible speed advanced warning
+								indicator boards, for example)</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								44002</td>
+							<td style="width: 575px">
+								Represents a TPWS Overspeed Sensor System (OSS) arming or trigger induction loop, associated with a signal</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								44003</td>
+							<td style="width: 575px">
+								Represents a TPWS Trainstop Sensor System (TSS) arming or trigger induction loop, which is permanently energised.</td>
+						</tr>
+						<tr>
+							<td class="column-1" style="width: 125px">
+								44004</td>
+							<td style="width: 575px">
+								Represents a TPWS Overspeed Sensor System (OSS) arming or trigger induction loop, which is permanently energised (for use with permissible speed advanced warning indicator boards, for example)</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+			<td style="width: 25%;">
+			</td>
+		</tr>
+	</table>
+	<br />
+	<a id="beacon-types-more-info"></a>
+	<strong><span style="text-decoration: underline">More information</span></strong><br />
+	<br />
+	openBVE's .Beacon command has the following format:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 700px">
+		<div class="codebox-shadow-content">
+			Track.Beacon <em>Type; BeaconStructureIndex; Section; Data; X; Y; Yaw; Pitch; Roll</em>
+		</div>
+	</div>
+	<br />
+	Please see the <a href="http://openbve.trainsimcentral.co.uk/develop/index.html">Developing for openBVE</a> section of the official openBVE homepage for more information.<br />
+	<br />
+	<a id="beacon-types-note-backwards-compatibility"></a>
+	<strong><span style="text-decoration: underline">A note regarding backwards compatiblity</span></strong><br />
+	<br />
+	In many cases, the beacons recognised by the UkTrainSys plugin are the same as with Simon Gathercole's previous generation of C++ Windows-only plugins written for BVE 4. However, in some cases, UkTrainSys supports new, enhanced functionality via differently formatted beacon commands, while retaining backwards compatibility with beacon commands found in routes written with Simon's plugins in mind.<br />
+	<br />
+	This documentation focuses on the new functionality which is provided by UkTrainSys, and openBVE route and train developers are encouraged to use the new functionality and beacon command parameters, if developing add-ons for openBVE. If you need to know about the legacy, backwards compatible beacon parameters and behaviours, then you can see the <a href="#beacon-types-legacy-behaviour">Legacy Behaviour</a> section, further down.<br />
+	<br />
+	<a id="beacon-types-apc"></a>
+	<strong><span style="text-decoration: underline">Beacon types and the Automatic Power Control system</span></strong><br />
+	<br />
+	<strong><em>Beacon 20:</em></strong><br />
+	<br />
+	This beacon serves two purposes...<br />
+	<br />
+	<em><strong>Firstly</strong></em>, it can represent a pair of Automatic Power Control (APC) magnets, used to trip open the air-blast/vacuum circuit breaker (ACB/VCB) between a pantograph and the traction power equipment, just before passing a neutral section in the overhead line equipment. The beacon can also be used to re-close the ACB/VCB if it is already open. For example:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 200px">
+		<div class="codebox-shadow-content">
+			1000, .Beacon 20;<span style="color: #008800">0</span><br />
+			1046, .Beacon 20;<span style="color: #008800">0</span>
+		</div>
+	</div>
+	<br />
+	This <tt>.Beacon 20</tt> command should be located where your APC magnets are required, both before <em>and</em> after the neutral section.<br />
+	<br />
+	Note: the <tt><span style="color: #008800">BeaconStructureIndex</span></tt> value will depend upon what objects you have loaded within your route file; please see the <a href="http://openbve.trainsimcentral.co.uk/develop/index.html">Developing for openBVE</a> section of the official openBVE homepage for more information.<br />
+	<br />
+	<em><strong>Secondly</strong></em>, the <tt>.Beacon 20</tt> command can specify the start and end of the actual neutral section itself (i.e. the earthed, non-energised, 4 metre ceramic bead section, which is spliced into the overhead line). For example:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 200px">
+		<div class="codebox-shadow-content">
+			1030, .Beacon 20;<span style="color: #008800">-1</span>;;<span style="color: #ff0000">-1</span><br />
+			1034, .Beacon 20;<span style="color: #008800">-1</span>;;<span style="color: #ff0000">-1</span>
+		</div>
+	</div>
+	<br />
+	The <tt>Data</tt> parameter of <span style="color: #ff0000">-1</span> in these <tt>.Beacon 20</tt> commands, tells the UkTrainSys plugin to treat these as the start and end of the neutral section.<br />
+	<br />
+	Note: the <tt><span style="color: #008800">BeaconStructureIndex</span></tt> value is -1 here, as we don't want any object to be displayed 	at the location of this beacon. Please see the <a href="http://openbve.trainsimcentral.co.uk/develop/index.html">Developing for openBVE</a> section of the official openBVE homepage for more information.<br />
+	<br />
+	<em><strong>Putting it all together:</strong></em><br />
+	<br />
+	To simulate a fully equipped neutral section, your route file commands would be as follows:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 500px">
+		<div class="codebox-shadow-content">
+			1000, .Beacon 20;<span style="color: #008800">0</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #888888">; first pair of APC magnets</span><br />
+			1030, .Beacon 20;<span style="color: #008800">-1</span>;;<span style="color: #ff0000">-1</span>,&nbsp;<span style="color: #888888">; commencement of neutral section</span><br />
+			1034, .Beacon 20;<span style="color: #008800">-1</span>;;<span style="color: #ff0000">-1</span>,&nbsp;<span style="color: #888888">; termination of neutral section</span><br />
+			1046, .Beacon 20;<span style="color: #008800">0</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #888888">; second pair of APC magnets</span>
+		</div>
+	</div>
+	<br />
+	<ul>
+	<li>When the train's Automatic Power Control (APC) recevier passes <em>1000</em> metres, the APC system will command open the air blast/vacuum circuit breaker (ACB/VCB), interrupting the power supply from the pantograph to the traction power equipment.</li>
+	<li>When the APC receiver location is between <em>1030</em> and <em>1034</em> metres, overhead line voltage is lost completely.</li>
+	<li>When the train's APC receiver passes <em>1046</em> metres, the APC system will command the air blast/vacuum circuit breaker to re-close, restoring the power supply from the pantograph to the traction power equipment.</li>
+	</ul>
+	If the train's pantograph inadvertently comes to a halt between <em>1030</em> and <em>1034</em> metres, then the train will have no power source, and you will have to either release the brakes and hope that your train is on an incline, such that it rolls out of the neutral section due to gravity, or you will have to declare a train failure. In the latter case, in reality, your train would need to be rescued by another train!<br />
+	<br />
+	If the train's pantograph inadvertently comes to a halt between <em>1000</em> and <em>1030</em> metres, or <em>1034</em> and <em>1046</em> metres, then the air blast/vacuum circuit breaker can be re-closed manually, and the train can be moved, so that another attempt to coast through the neutral section can be made.<br />
+	<br />
+	<a id="beacon-types-ai-guard"></a>
+	<strong><span style="text-decoration: underline">Beacon types and the AI Guard</span></strong><br />
+	<br />
+	<strong><em>Beacon 23:</em></strong><br />
+	<br />
+	This beacon is used to tell the AI guard whether or not an upcoming station has stopping location constraints which should be observed,
+	or ignored (or rather, whether subsequent <tt>.Beacon 24</tt> commands should be ignored or not). If the stopping point is to be monitored, then the AI guard will signal the driver with audible buzzer codes if the train stops outside of the defined stopping
+	location limits, provided the train is within defined station area limits. If the stopping location is to be monitored, the
+	<tt>Data</tt> parameter should be a value other than 0, such as 1. For example:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 200px">
+		<div class="codebox-shadow-content">
+			.Beacon 23;<span style="color: #008800">-1</span>;;<span style="color: #ff0000">1</span>
+		</div>
+	</div>
+	<br />
+	Note: the <tt><span style="color: #008800">BeaconStructureIndex</span></tt> value is -1 here, as we don't want any object to be displayed 	at the location of this beacon. Please see the <a href="http://openbve.trainsimcentral.co.uk/develop/index.html">Developing for openBVE</a> section of the official openBVE homepage for more information.<br />
+	<br />
+	<strong><em>Beacon 24:</em></strong><br />
+	<br />
+	This beacon is used by the AI guard, and serves three purposes. Firstly, it's presence alone determines the start (or end) of station
+	limits. The location of the first <tt>.Beacon 24</tt> command following a <tt>.Beacon 23</tt> command in the route, determine the start
+	of the station area limits, and the location of the second <tt>.Beacon 24</tt> command determines the end of the station area limits.
+	This beacon is also used to determine the location of the upcoming stopping location, and it also used to determine the permitted
+	underrun and overrun distances from this stopping location, in metres. Provided a <tt>.Beacon 23</tt> command with a <tt>Data</tt>
+	parameter other than 0 was passed previously, the plugin will act upon the parameters passed via a <tt>.Beacon 24</tt> command.<br />
+	<br />
+	As mentioned already, this beacon type should be placed twice; once before the station, and once after the station. The first
+	<tt>.Beacon 24</tt> command before the station, defines the start of the station limits (the AI guard will monitor whether or not the
+	train stops in the wrong place after passing this beacon), and should have a format as follows:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 200px">
+		<div class="codebox-shadow-content">
+			.Beacon 24;<span style="color: #008800">-1</span>;;<span style="color: #ff0000">195</span><span style="color: #990099">75</span><span style="color: #0000ff">25</span><span style="color: #ff00ff">03</span>
+		</div>
+	</div>
+	<br />
+	All the information which the plugin requires is passed via the <tt>Data</tt> parameter. The <tt>Data</tt> parameter must be <em>at least</em> 7 digits in length, and contain only numbers.<br />
+	<br />
+	<span style="color: #ff0000">The first three digits</span> represent the distance from the <tt>.Beacon 24</tt> command to the
+	<tt>.Stop</tt> command, as defined in the route file (you'll need to work out this distance value yourself, and change the value if you
+	subsequently relocate either the <tt>.Stop</tt> or <tt>.Beacon 24</tt> commands). In this example, the beacon is 195 metres from the
+	<tt>.Stop</tt> command.<br />
+	<br />
+	<span style="color: #990099">The 4th and 5th digits</span> define the permitted underrun in metres. In this case, the permitted underrun is 75 metres.<br />
+	<strong>Note:</strong> For best results, the <tt>BackwardTolerance</tt> parameter of openBVE's <tt>.Stop</tt> command, should match this value.<br />
+	<br />
+	<span style="color: #0000ff">The 6th and 7th digits</span> define the permitted overrun in metres. In this example, the permitted overrun is 25 metres.<br />
+	<strong>Note:</strong> For best results, the <tt>ForwardTolerance</tt> parameter of openBVE's <tt>.Stop</tt> command, should match this value.<br />
+	<br />
+	<span style="color: #ff00ff">The 8th and 9th digits</span> are OPTIONAL and can be omitted, if there is only one stopping location at the upcoming station. These specify how many cars a train must have at maximum, for the stopping point to apply to the train. In the above example, the stopping location specified by this beacon command, only applies if the train has 3 cars or less. If the train has 4 cars or more, then the beacon information is ignored. You should place a subsequent <tt>.Beacon 24</tt> command which specifies no cars at all, to act as a "catch all" for trains of any length.<br />
+	<br />
+	<strong>Note:</strong> As the <tt>Data</tt> parameter must be <em>at least</em> 7 digits in length, you can insert zeros where necessary. For example, if your distance from the beacon to the <tt>.Stop</tt> command is 99 metres, then you would specify this as 099. As a more silly example, if the distance was 9 metres, then this would be specified as 009.<br />
+	<br />
+	The second placement of this beacon, which defines the end of the station limits (once passed this beacon, the AI guard no longer
+	monitors where the train stops), should have the following format:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 200px">
+		<div class="codebox-shadow-content">
+			.Beacon 24;<span style="color: #008800">-1</span>;;<span style="color: #ff0000">0</span>
+		</div>
+	</div>
+	<br />
+	Note: the <tt><span style="color: #008800">BeaconStructureIndex</span></tt> value is -1 in the above examples, as we don't want any object to be displayed
+	at the location of these beacons. Please see the <a href="http://openbve.trainsimcentral.co.uk/develop/index.html">Developing for openBVE</a>
+	section of the official openBVE homepage for more information.<br />
+	<br />
+	<strong><em>Putting it all together:</em></strong><br />
+	<br />
+	So, in your route file, you would end up with something like the following, which allows for an <tt>Underrun/BackwardTolerance</tt> of <span style="color: #990099">25</span> metres, and an <tt>Overrun/ForwardTolerance</tt> of <span style="color: #0000ff">30</span> metres (simple example wtih only one stopping location):<br />
+	<br />
+	<div class="codebox-shadow">
+		<div class="codebox-shadow-content">
+			1000, .Beacon 23;<span style="color: #008800">-1</span>;;<span style="color: #ff0000">1</span><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.Beacon 24;<span style="color: #008800">-1</span>;;<span style="color: #ff0000">200</span><span style="color: #990099">25</span><span style="color: #0000ff">30</span><br />
+			<br />
+			<span style="color: #888888">; --- Start of station platform at 1025m ---</span><br />
+			1025, .Sta MyStation;10.0000;10.0130;;1;0;;;20;30;;0<br />
+			1200, .Stop 0;<span style="color: #990099">25</span>;<span style="color: #0000ff">30</span>, <span style="color: #888888">; All car stop point</span><br />
+			<span style="color: #888888">; --- End of station platform at 1225m ---</span><br />
+			<br />
+			1400, .Beacon 24;<span style="color: #008800">-1</span>;;<span style="color: #ff0000">0</span><br />
+		</div>
+	</div>
+	<br />
+	If you had a station with two stopping points - one for 3 car trains or less, and one for 6 car trains or less (but greater than 3), plus a third for any train which is greater than 6 cars in length, you could use the following in your route file (advanced example):<br />
+	<br />
+	<div class="codebox-shadow" style="width: 800px">
+		<div class="codebox-shadow-content">
+			1000, .Beacon 23;<span style="color: #008800">-1</span>;;<span style="color: #ff0000">1</span><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.Beacon 24;<span style="color: #008800">-1</span>;;<span style="color: #ff0000">150</span><span style="color: #990099">50</span><span style="color: #0000ff">99</span><span style="color: #ff00ff">03</span><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.Beacon 24;<span style="color: #008800">-1</span>;;<span style="color: #ff0000">225</span><span style="color: #990099">50</span><span style="color: #0000ff">25</span><span style="color: #ff00ff">06</span><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.Beacon 24;<span style="color: #008800">-1</span>;;<span style="color: #ff0000">225</span><span style="color: #990099">25</span><span style="color: #0000ff">25</span><br />
+			<br />
+			<span style="color: #888888">; --- Start of station platform at 1025m ---</span><br />
+			1025, .Sta MyStation;10.0000;10.0130;;1;0;;;20;30;;0<br />
+			1150, .Stop 0;<span style="color: #990099">50</span>;<span style="color: #0000ff">99</span>;<span style="color: #ff00ff">3</span>, <span style="color: #888888">; 3 car stop point (tolerances assume 3 * 25m length cars)</span><br />
+			1225, .Stop 0;<span style="color: #990099">50</span>;<span style="color: #0000ff">25</span>;<span style="color: #ff00ff">6</span>, <span style="color: #888888">; 6 car stop point (tolerances assume 6 * 25m length cars)</span><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.Stop 0;<span style="color: #990099">25</span>;<span style="color: #0000ff">25</span>,&nbsp;&nbsp; <span style="color: #888888">; &gt;6 car stop point (assumes little, as any train length &gt;6 cars is handled)</span><br />
+			<span style="color: #888888">; --- End of station platform at 1250m ---</span><br />
+			<br />
+			1400, .Beacon 24;<span style="color: #008800">-1</span>;;<span style="color: #ff0000">0</span><br />
+		</div>
+	</div>
+	<br />
+	If you wanted to disable AI guard monitoring of this station, for example if the train is not scheduled to stop in a particular route
+	file, you can simply change <tt>.Beacon 23;;;<span style="color: #ff0000">1</span></tt> to <tt>.Beacon 23;;;<span style="color: #ff0000">0</span></tt>.<br />
+	<br />
+	<strong>Final note:</strong> If you forget to place the final <tt>.Beacon 24</tt> command in your route file, then the AI guard will stop monitoring the stopping location, 500 metres after the stopping location which has been determined by UkTrainSys.<br />
+	<br />
+	<br />
+	<a id="beacon-types-ai-support"></a>
+	<strong><span style="text-decoration: underline">Beacon types and the AI Support feature</span></strong><br />
+	<br />
+	<strong><em>Beacon 50:</em></strong><br />
+	<br />
+	This beacon is used by the AI Support. Upon passing <tt>.Beacon 50</tt>, the optional <tt>Data</tt> parameter contains information which the AI Support feature can use to perform some action within the cab, in response to passing over this beacon. The <tt>Data</tt> parameter is an integer ranging from zero upwards. Currently supported values are as follows:<br />
+	<br />
+	<br />
+	<table style="width: 100%; text-align: center;">
+		<tr>
+			<td style="width: 25%;">
+			</td>
+			<td>
+				<table class="table-data" style="width: 700px; text-align: left;">
+					<thead>
+						<tr>
+							<th style="width: 150px"><span style="white-space: nowrap"><tt>Data</tt> parameter</span>
+							</th>
+							<th style="width: 550px"><span style="white-space: nowrap">AI Support Instruction</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="column-1" style="width: 150px">
+								0</td>
+							<td style="width: 550px">
+								Sound the horn (lever forward first, then backwards)</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								1</td>
+							<td>
+								Sound the horn (lever backwards first, then forwards</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								&nbsp;</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								40</td>
+							<td>
+								Informs the AI Support that the next stopping point is at the terminal station on the route. Only place this beacon 50 command prior to the last .Stop command in the route</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								41</td>
+							<td>
+								Instructs the AI Support to lower the pantograph (or stop the diesel engine), when the train next stops and the doors open (i.e. at a station). Only place this beacon 50 command prior to the last .Stop command in the route</td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								&nbsp;</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="column-1">
+								920<span style="color: #0000ff">d</span><span style="color: #ff0000">xxxxx</span></td>
+							<td>
+								Informs the AI Support that there is a neutral section ahead (or behind)<br />
+								<br />
+								<ul>
+									<li><span style="color: #0000ff">d</span> should be 1 (ahead);</li>
+									<li><span style="color: #ff0000">xxxxx</span> should be a value between 00000 and 99999, which is the distance between the beacon and the neutral section, in <em>metres</em>.<br />
+									<br />
+									If <span style="color: #0000ff">d</span> is 1, then UkTrainSys interprets the neutral section as being <span style="color: #ff0000">xxxxx</span> number of metres <em>ahead</em> of the beacon location, and the beacon is ignored when travelling <em>backwards</em>. The AI doesn't currently drive backwards, so there's no need to handle reverse direction behaviour yet.<br />
+									<br />
+									You should pad your distance value with zeros where appropriate. For example, if your neutral section is 200 metres ahead, the distance passed to the plugin would be <span style="color: #ff0000">00200</span>. The full <tt>.Beacon</tt> command would therefore be:<br />
+									<br />
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.Beacon 920<span style="color: #0000ff">1</span><span style="color: #ff0000">00200</span><br />
+									<br />
+									<strong>Note:</strong> If the tap changer is enabled, then this takes up to 35 seconds to run down from notch 38. When deciding where to place a neutral section ahead beacon, you should check to see how far a train which is travelling at the permitted linespeed, can travel within at least 35 seconds. This will let you know where the beacon should be placed. If the tap changer is not enabled, then UkTrainSys will remember that the beacon has been passed, and will return the power handle to the off position, 5 seconds before reaching the calculated location of the neutral section. If you jump to a station, the information passed via the beacon is discarded.</li></td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+			<td style="width: 25%;">
+			</td>
+		</tr>
+	</table>
+	<br />
+	For example:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 200px">
+		<div class="codebox-shadow-content">
+			.Beacon 50;<span style="color: #008800">-1</span>;;<span style="color: #ff0000">0</span>
+		</div>
+	</div>
+	<br />
+	The <tt>Section</tt> parameter of <span style="color: #ff0000">0</span> in this <tt>.Beacon 50</tt> command, would instruct the AI Support feature to blow the horn, first by moving the horn lever forwards, then backwards.<br />
+	<br />
+	Note: the <tt><span style="color: #008800">BeaconStructureIndex</span></tt> value is -1 here, as we don't want any object to be displayed
+	at the location of this beacon. Please see the <a href="http://openbve.trainsimcentral.co.uk/develop/index.html">Developing for openBVE</a>
+	section of the official openBVE homepage for more information.<br />
+	<br />
+	<br />
+	<a id="beacon-types-aws"></a>
+	<strong><span style="text-decoration: underline">Beacon types and the Automatic Warning System (AWS)</span></strong><br />
+	<br />
+	There is just a single beacon required for prototypical Automatic Warning System (AWS) simulation.<br />
+	<br />
+	<strong><em>Beacon 44000:</em></strong><br />
+	<br />
+	This beacon represents either an AWS permanent magnet with it's south pole facing upwards, or an AWS electromagnet with it's north pole facing upwards (the latter is associated with a signal). Which of these the beacon represents, is determined by the optional <tt>Data</tt> parameter.<br />
+	<br />
+	An AWS permanent magnet by itself, always primes the AWS, and starts a delay period which lasts for <em>1000 milliseconds</em>. If this delay period elapses, an AWS warning is issued.<br />
+	<br />
+	An AWS electromagnet should immediately follow an AWS permanent magnet, and the electromagnet is energised only when the associated signal is showing a clear (green) aspect. When the aforementioned permanent magnet primes the AWS, detection of the electromagnet within the delay period, causes an AWS clear indication to be issued. If the associated signal is showing a restrictive aspect (red or yellow), then the electromagnet is de-energised, and therefore it is not detected by the AWS equipment. Thus, the AWS delay period elapses, and an AWS warning is issued.<br />
+	<br />
+	<strong>Note:</strong> As with the real AWS, if you drive at a very low speed over an AWS inductor, while the associated signal is showing a green aspect, then the AWS delay period may elapse before the electromagnet is reached, and an AWS warning will be issued. If the AWS warning is not acknowledged, then the warning will automatically clear upon passing the electromagnet (provided no brake demand has occured). So, when approaching a green signal at very low speeds, you may briefly hear the warning horn and be presented with the AWS sunflower, and then hear the AWS bell and see the sunflower instrument go black.<br />
+	<br />
+	<strong>AWS inductor associated with a signal:</strong><br />
+	<br />
+	For an AWS inductor associated with a signal, use the following pair of <tt>.Beacon 44000</tt> commands:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 550px">
+		<div class="codebox-shadow-content">
+			100.0, .Beacon 44000;<span style="color: #008800">-1</span>;;<span style="color: #0000ff">180</span>, <span style="color: #888888">; AWS permanent magnet (south pole)</span><br />
+			101.0, .Beacon 44000;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">360</span>, <span style="color: #888888">; AWS electromagnet (north pole)</span>
+		</div>
+	</div>
+	<br />
+	Firstly, note the spacing between the two <tt>.Beacon 44000</tt> commands - they should be <em>1 metre</em> apart. There is no absolute limit, but this ensures reliable operation.<br />
+	<br />
+	Secondly, note the order in which the commands appear - as with the real AWS, they must appear in this sequence, to work correctly in the normal (forward) direction of travel. If the order is reversed, then they would only be suitable for the opposite direction of travel.<br />
+	<br />
+	Thirdly, the <tt>Data</tt> parameter of <span style="color: #0000ff">180</span> in the first <tt>.Beacon 44000</tt> command, represents the magnet's south pole, and the <tt>Data</tt> parameter of <span style="color: #0000ff">360</span> in the second <tt>.Beacon 44000</tt> command, represents the north pole.<br />
+	<br />
+	The <tt>Section</tt> parameter of the first <tt>.Beacon 44000</tt> command can be omitted, because this beacon represents a permanent magnet which is always detectable. This primes the AWS, ready to detect the state of the second <tt>.Beacon 44000</tt> command.<br />
+	<br />
+	With the second <tt>.Beacon 44000</tt> command, the <tt>Section</tt> parameter of <span style="color: #ff0000">1</span>, references the next section ahead, and if the signal apsect associated with section <span style="color: #ff0000">1</span> is green, an AWS clear indication will be issued when this beacon command is encountered. If the aspect is red or yellow, the beacon is ignored, and and AWS warning will be issued, 1 second after the first beacon was passed.<br />
+	<br />
+	Note: the <tt><span style="color: #008800">BeaconStructureIndex</span></tt> value will depend upon
+	what objects you have loaded within your route file; please see the <a href="http://openbve.trainsimcentral.co.uk/develop/index.html">Developing for openBVE</a> section of the official openBVE homepage
+	for more information.<br />
+	<br />
+	<strong>AWS permanent magnet associated with a temporary or permanent speed restriction:</strong><br />
+	<br />
+	For an AWS inductor associated with a temporary or permanent speed restriction, use the following <tt>.Beacon 44000</tt> command:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 550px">
+		<div class="codebox-shadow-content">
+			100.0, .Beacon 44000;<span style="color: #008800">0</span>;;<span style="color: #0000ff">180</span>, <span style="color: #888888">; AWS permanent magnet (south pole)</span><br />
+		</div>
+	</div>
+	<br />
+	The <tt>Data</tt> parameter of <span style="color: #0000ff">180</span>, represents the magnet's south pole.<br />
+	<br />
+	The <tt>Section</tt> parameter of the <tt>.Beacon 44000</tt> command can be omitted, because this beacon represents a permanent magnet which is always detectable. This primes the AWS, and as there is no second <tt>.Beacon 44000</tt> command, an AWS warning will be issued, 1 second after this beacon is passed.<br />
+	<br />
+	Note: the <tt><span style="color: #008800">BeaconStructureIndex</span></tt> value will depend upon
+	what objects you have loaded within your route file; please see the <a href="http://openbve.trainsimcentral.co.uk/develop/index.html">Developing for openBVE</a> section of the official openBVE homepage
+	for more information.<br />
+	<br />
+	<strong>A note on opposite direction of travel, as well as bi-directional signalling and AWS suppression:</strong><br />
+	<br />
+	If a train is driven backwards over an AWS inductor associated with a signal, then an AWS warning will be issued, as the beacon representing an electromagnet is passed first, but as the AWS is not yet primed, the electromagnet beacon is not acted upon. When the AWS is subsequently primed by the permanent magnet, the delay period will elapse, thus issuing an AWS warning, regardless.<br />
+	<br />
+	openBVE does not presently support bi-directional signalling, however, the UkTrainSys plugin does support AWS suppression, which prevents an AWS permanent magnet from being detected. This would be linked to the signalling system, such that when trains are permitted to travel in the opposite direction, AWS permanent magnets which are only meant to apply to signals in the normal direction of travel, would be suppressed (and vice-versa).<br />
+	<br />
+	To suppress an AWS permanent magnet, you can do use the follwing <tt>.Beacon 44000</tt> command:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 550px">
+		<div class="codebox-shadow-content">
+			100.0, .Beacon 44000;<span style="color: #008800">-1</span>;;<span style="color: #0000ff">270</span>, <span style="color: #888888">; AWS suppression</span><br />
+		</div>
+	</div>
+	<br />
+	The <tt>Data</tt> parameter of <span style="color: #0000ff">270</span>, tells UkTrainSys that this <tt>.Beacon 44000</tt> command represents a suppression magnet.<br />
+	<br />
+	The <tt>Section</tt> parameter can be omitted, to unconditionally suppress the <em><strong>subsequent</strong></em> AWS permanent magnet <em>(in the direction of travel)</em>. In future, UkTrainSys could be expanded to act upon a section which applies to the opposite direction of travel, where the aspect of that section could conditionally suppress the subsequent AWS permanent magnet (remember, openBVE doesn't currently support bi-directional signalling - this is an idea for future use only).<br />
+	<br />
+	The AWS permanent magnet which is to be suppressed, MUST be located within 2 metres of the suppression beacon (a distance of <em>0.5 metres</em> is recommended).<br />
+	<br />
+	For example, to suppress an AWS permanent magnet in the opposite (reverse) direction of travel only:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 550px">
+		<div class="codebox-shadow-content">
+			100.0, .Beacon 44000;<span style="color: #008800">-1</span>;;<span style="color: #0000ff">180</span>, <span style="color: #888888">; AWS permanent magnet (south pole)</span><br />
+			100.5, .Beacon 44000;<span style="color: #008800">-1</span>;;<span style="color: #0000ff">270</span>, <span style="color: #888888">; AWS suppression</span><br />
+			101.0, .Beacon 44000;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">360</span>, <span style="color: #888888">; AWS electromagnet (north pole)</span>
+		</div>
+	</div>
+	<br />
+	In the above example, the suppression beacon is encountered before the beacon representing the permanent magnet, <strong>ONLY</strong> if the train is travelling backwards, and if the train is travelling backwards, the permanent magnet will be ignored by the UkTrainSys plugin. If the train is travelling forwards, the AWS permanent magnet will still be detected, as usual.<br />
+	<br />
+	To suppress an AWS permanent magnet in the normal (forward) direction of travel only:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 550px">
+		<div class="codebox-shadow-content">
+			&nbsp;99.5, .Beacon 44000;<span style="color: #008800">-1</span>;;<span style="color: #0000ff">270</span>, <span style="color: #888888">; AWS suppression</span><br />
+			100.0, .Beacon 44000;<span style="color: #008800">-1</span>;;<span style="color: #0000ff">180</span>, <span style="color: #888888">; AWS permanent magnet (south pole)</span><br />
+			101.0, .Beacon 44000;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">360</span>, <span style="color: #888888">; AWS electromagnet (north pole)</span>
+		</div>
+	</div>
+	<br />
+	In this example, the suppression beacon is encountered before the beacon representing the permanent magnet, <strong>ONLY</strong> if the train is travelling forwards, and the permanent magnet will be ignored by the UkTrainSys plugin in the forward direction. If the train is travelling backwards, the AWS permanent magnet will still be detected, as usual.<br />
+	<br />
+	If you want to suppress an AWS permanent magnet in both directions of travel, then you can either remove the beacon representing the permanent magnet altogether, or place a suppression beacon both before and after the beacon representing the permanent magnet.<br />
+	<br />
+	<br />
+	<a id="beacon-types-tpws"></a>
+	<strong><span style="text-decoration: underline">Beacon types and the Train Protection and Warning System (TPWS)</span></strong><br />
+	<br />
+	<strong><em>Beacon 44002:</em></strong><br />
+	<br />
+	This beacon represents a TPWS Overspeed Sensor System (OSS) induction loop, associated with a signal. This beacon supports prototypical TPWS operation, where the permissible speed is determined by the spacing between a pair of OSS induction loops, combined with a pair of train-borne timers, and also allowing for induction loop nesting and interleaving, and opposite direction of travel. When the section referenced by the <tt>Section</tt> parameter of a <tt>.Beacon 44002</tt> command has an aspect of 0 (i.e. the section is occupied by a train), the induction loop is energised.<br />
+	<br />
+	To simulate prototypical TPWS Overspeed Sensor System behaviour, a pair of <tt>.Beacon 44002</tt> commands should be placed in the route file, where the first <tt>.Beacon 44002</tt> command represents the OSS arming induction loop, and the second <tt>.Beacon 44002</tt> command represents the OSS trigger induction loop.<br />
+	<br />
+	When the plugin registers passing the OSS arming induction loop (identified by one of two frequencies which should be emitted from it), one of two timers associated with either frequency is started within the plugin, which counts to <em>974 milliseconds</em> on passenger trains, and <em>1218 milliseconds</em> on freight trains (this timeout period can be set via the <em>UkTrainSys.cfg file</em> - please <a href="#config-file">see below</a> for more information). If the associated timer has not expired by the time a matching OSS trigger induction loop is encountered (which is identified by one of two different frequencies which should be emitted from it), then the TPWS deems that the train is travelling too fast, and will issue an OSS Brake Demand. Thus, the speed at which a TPWS equipped train is permitted to travel on approaching a red signal, is determined by both the timeout period, and the distance between the two <tt>.Beacon 44002</tt> commands which are emitting recognised frequencies.<br />
+	<br />
+	For prototypical TPWS simulation, the <tt>.Beacon 44002</tt> commands should be used as follows (both of these examples would create an OSS with a permissible speed of around 56 km/h).<br />
+	<br />
+	For the normal direction of travel, the following beacon should be used (applies to ordinary uses of TPWS in a route):<br />
+			<br />
+	<div class="codebox-shadow" style="width: 500px">
+		<div class="codebox-shadow-content">
+			1004.85, .Beacon 44002;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>42</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS arming loop</span><br />
+			1020.00, .Beacon 44002;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>52</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS trigger loop</span>
+		</div>
+	</div>
+	<br />
+	Firstly, note the <strong>spacing</strong> between the two beacons, which is 15.15 metres (<tt>1020 - 1004.85 = 15.15</tt>). This determines the OSS permissible speed (a very easy and quick formula for calculating the distance for a given speed, can be found below).<br />
+	<br />
+	The <tt>Section</tt> parameter of <span style="color: #ff0000">1</span>, references the next section ahead, and if section
+	<span style="color: #ff0000">1</span> is occupied, the loops are energised. If the timer which is triggered by the arming loop, has not expired before the trigger loop is reached, then passing the second <tt>.Beacon 44002</tt> command will trigger a TPWS OSS Brake Demand.<br />
+	<br />
+	The <tt>Data</tt> parameter of <span style="color: #0000ff">6<strong>42</strong>50</span> in the first <tt>.Beacon 44002</tt> command, represents the arming frequency of 64250 Hz (64.25 kHz).<br />
+	<br />
+	The <tt>Data</tt> parameter of <span style="color: #0000ff">6<strong>52</strong>50</span> in the second <tt>.Beacon 44002</tt> command, represents the trigger frequency of 65250 Hz (65.25 kHz).<br />
+	<br />
+	The frequencies must exactly match the values shown in the above example, and they must appear in the order shown. This means that the OSS is only recongnised when travelling in the forward direction, and is ignored if travelling backwards over the beacons. If you inadvertently get the frequencies the wrong way around, then the OSS will only be effective if you <em>are</em> travelling backwards!<br />
+	<br />
+	Note: the <tt><span style="color: #008800">BeaconStructureIndex</span></tt> value will depend upon what objects you have loaded within your route file; please see the <a href="http://openbve.trainsimcentral.co.uk/develop/index.html">Developing for openBVE</a> section of the official openBVE homepage for more information.<br />
+	<br />
+	<strong>TPWS+ (OSS+):</strong><br />
+	<br />
+	If a TPWS+ (Plus) installation is being simulated, then the same pair of beacons (with the same frequencies specified in the same order), should be used. The first occurance of the pair of <tt>.Beacon 44002</tt> commands (the OSS+), should be located around 750 metres in the rear of the associated signal, and the beacon pair should be spaced further apart, so that they allow a higher permissible speed than the inner pair of <tt>.Beacon 44002</tt> commands.<br />
+	<br />
+	<strong>OSS induction loop spacing:</strong> The formula for working out the correct spacing between the <tt>.Beacon 44002</tt> commands, and hence correctly setting the permissible speed, is as follows. You can use either the passenger train OSS timeout, or the freight train OSS timeout, to calculate the beacon spacing. However, I would recommend using the passenger train timeout value.<br />
+	<br />
+	If using the passenger train OSS timeout period of 974 ms:<br />
+	<br />
+	<div style="margin-left:40px">
+		<tt>distance[m] = 0.27056 * speed[km/h]</tt>
+	</div>
+	<br />
+	If using the freight train OSS timeout period of 1218 ms:<br />
+	<br />
+	<div style="margin-left:40px">
+		<tt>distance[m] = 0.33833 * speed[km/h]</tt>
+	</div>
+	<br />
+	You can also calculate the beacon spacing with any OSS timeout value, by using the following formula:<br />
+	<br />
+	<div style="margin-left:40px">
+		<tt>distance[m] = ((permittedspeed[km/h] * 1000) * timeout[s]) / 3600</tt><br />
+		<br />
+		For passenger trains, <tt>timeout</tt> is 0.974 <em>seconds</em>;<br />
+		For freight trains, the <tt>timeout</tt> is 1.218 <em>seconds</em>.
+	</div>
+	<br />
+	<strong><em>Beacon 44003:</em></strong><br />
+	<br />
+	This beacon represents a TPWS Trainstop Sensor System (TSS) induction loop, associated with a signal. When the section referenced by the
+	<tt>Section</tt> parameter of a <tt>.Beacon 44003</tt> command has an aspect of 0 (i.e. the section is occupied by a train), the TSS induction loop is energised.<br />
+	<br />
+	To simulate prototypical TPWS Trainstop Sensor System behaviour, a pair of <tt>.Beacon 44003</tt> commands should be placed in the route file, where the first <tt>.Beacon 44003</tt> command represents the TSS arming induction loop, and the second <tt>.Beacon 44003</tt> command represents the TSS trigger induction loop.<br />
+	<br />
+	When the plugin registers passing the TSS arming induction loop (identified by one of two frequencies which should be emitted from it), one of two detection states associated with either frequency is activated within the plugin. If the TSS trigger induction loop (which is identified by one of two different frequencies which should be emitted from it), is detected <em>after</em> the arming loop is detected, but while the trigger loop is still within range of the arming loop, then the plugin will recognise this condition as a valid TSS installation, and will issue a TSS Brake Demand. The use of an arming and trigger loop, together with specific frequencies, allows for prototypical behaviour when travelling backwards over the induction loops, for example.<br />
+	<br />
+	For prototypical TPWS TSS simulation, the <tt>.Beacon 44003</tt> commands should be used as follows:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 500px">
+		<div class="codebox-shadow-content">
+			100, .Beacon 44003;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>62</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS TSS arming loop</span><br />
+			101, .Beacon 44003;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>52</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS TSS trigger loop</span>
+		</div>
+	</div>
+	<br />
+	The <tt>Section</tt> parameter of <span style="color: #ff0000">1</span>, references the next section ahead, and if section
+	<span style="color: #ff0000">1</span> is occupied, the TSS induction loops are energised.<br />
+	<br />
+	Note the <em>spacing</em> between the two <tt>.Beacon 44003</tt> commands - they are 1 metre apart. They can be spaced up to 2 metres apart, but any more than this, and the TSS trigger loop will be out of range of the TSS arming loop, and the TSS will not work. The TPWS will only act upon the detection of the trigger frequency, if it is close enough to the arming loop at the time.<br />
+	<br />
+	If you were to switch the above <tt>.Beacon 44003</tt> commands around, such that the trigger loop comes before the arming loop, then the TSS would only be recognised as such, if the train was travelling backwards over the TSS.<br />
+	<br />
+	Note: the <tt><span style="color: #008800">BeaconStructureIndex</span></tt> value will depend upon what objects you have loaded within your route file; please see the <a href="http://openbve.trainsimcentral.co.uk/develop/index.html">Developing for openBVE</a> section of the official openBVE homepage for more information.<br />
+	<br />
+	<em><strong>Putting it all together:</strong></em><br />
+	<br />
+	A typical signal with AWS and standard TPWS, could be declared as follows (the OSS beacon spacing of 15.15 metres, would give around a 56 km/h permissible speed):<br />
+	<br />
+	<div class="codebox-shadow" style="width: 800px">
+		<div class="codebox-shadow-content">
+			1004.85, .Beacon 44002;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>42</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS arming loop</span><br />
+			1020.00, .Beacon 44002;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>52</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS trigger loop</span><br />
+			<br />
+			1036.0, .Beacon 44000;<span style="color: #008800">-1</span>;;<span style="color: #ff0000">180</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #888888">; AWS permanent magnet (south pole)</span><br />
+			1037.0, .Beacon 44000;<span style="color: #008800">0</span>;1;<span style="color: #ff0000">360</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #888888">; AWS electromagnet (north pole)</span><br />
+			<br />
+			1219.00, .Beacon 44003;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>62</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS TSS arming loop</span><br />
+			1220.00, .Beacon 44003;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>52</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS TSS trigger loop</span><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.SigF 4;1;-2.1;5.85,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #888888">; Signal</span><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.Section 0;2;3;4,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #888888">; New section</span><br />
+		</div>
+	</div>
+	<br />
+	A typical signal with AWS, TPWS and TPWS+, is declared as follows (the OSS+ beacon spacing of 25.97 metres, would give around a 96 km/h permissible speed, while the OSS beacon spacing of 15.15 metres, would give around a 56 km/h permissible speed):<br />
+	<br />
+	<div class="codebox-shadow" style="width: 800px">
+		<div class="codebox-shadow-content">
+			&nbsp;444.03, .Beacon 44002;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>42</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS+ arming loop</span><br />
+			&nbsp;470.00, .Beacon 44002;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>52</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS+ trigger loop</span><br />
+			<br />
+			1004.85, .Beacon 44002;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>42</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS arming loop</span><br />
+			1020.00, .Beacon 44002;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>52</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS trigger loop</span><br />
+			<br />
+			1036.0, .Beacon 44000;<span style="color: #008800">-1</span>;;<span style="color: #ff0000">180</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #888888">; AWS permanent magnet (south pole)</span><br />
+			1037.0, .Beacon 44000;<span style="color: #008800">0</span>;1;<span style="color: #ff0000">360</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #888888">; AWS electromagnet (north pole)</span><br />
+			<br />
+			1219.00, .Beacon 44003;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>62</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS TSS arming loop</span><br />
+			1220.00, .Beacon 44003;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>52</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS TSS trigger loop</span><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.SigF 4;1;-2.1;5.85,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #888888">; Signal</span><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.Section 0;2;3;4,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #888888">; New section</span><br />
+		</div>
+	</div>
+	<br />
+	Note that in these examples, the TPWS induction loops, AWS magnets, and signal command, are placed <strong><em>before</em></strong> the <tt>.Section</tt> command for the upcoming signal.<br />
+	<br />
+	<strong><em>Beacon 44004:</em></strong><br />
+	<br />
+	This beacon represents a permanently energised TPWS Overspeed Sensor induction loop, not associated with a signal, but rather, for
+	example, a permissible speed indicator board.<br />
+	<br />
+	This beacon is essentially identical to <tt>.Beacon 44002</tt>, as detailed above, except that <tt>.Beacon 44004</tt> will always arm the relevant TPWS OSS timer, regardless of signal aspects. As such, you can omit the <tt>Section</tt> parameter:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 500px">
+		<div class="codebox-shadow-content">
+			1004.85, .Beacon 44004;<span style="color: #008800">0</span>;;<span style="color: #0000ff">6<strong>42</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS arming loop</span><br />
+			1020.00, .Beacon 44004;<span style="color: #008800">0</span>;;<span style="color: #0000ff">6<strong>52</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS trigger loop</span>
+		</div>
+	</div>
+	<br />
+	Note: the <tt><span style="color: #008800">BeaconStructureIndex</span></tt> value will depend upon what objects you have loaded within your route file; please see the <a href="http://openbve.trainsimcentral.co.uk/develop/index.html">Developing for openBVE</a> section of the official openBVE homepage for more information.<br />
+	<br />
+	The same notes with regard to the OSS induction loop arming and trigger frequencies, apply to this beacon as well.<br />
+	<br />
+	<a id="beacon-types-tpws-for-advanced-developers"></a>
+	<strong>For advanced developers - interleaving and nesting TPWS induction loops:</strong><br />
+	<br />
+	As with the real TPWS, the UkTrainSys plugin allows you to nest or interleave TPWS induction loops. This is done, for example, when an OSS associated with a signal, is located in the same place as an OSS associated with an upcoming permanent speed restriction. It can even allow TPWS to be prototypically simulated on a bi-directionally signalled line (more for future use).<br />
+	<br />
+	<strong><em>OSS:</em></strong><br />
+	<br />
+	The UkTrainSys plugin identifies TPWS induction loops by the beacon type, but also by the frequency being emitted from the beacon, specified via the optional <tt>Data</tt> parameter. UkTrainSys actually simulates two train-borne timers (Timer A and Timer B), and each is independent of the other, and both can be operative simulataneously. Each timer is started or triggered, by a different arming and trigger frequency pair. For example:<br />
+	<br />
+	OSS Timer A, is armed and triggered by the following <span style="color: #0000ff">frequencies</span>:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 550px">
+		<div class="codebox-shadow-content">
+			1004.85, .Beacon 44002;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>42</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS arming loop (Timer A)</span><br />
+			1020.00, .Beacon 44002;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>52</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS trigger loop (Timer A)</span>
+		</div>
+	</div>
+	<br />
+	OSS Timer B, is armed and triggered by the following different <span style="color: #0000ff">frequencies</span>:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 550px">
+		<div class="codebox-shadow-content">
+			1004.85, .Beacon 44002;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>47</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS arming loop (Timer B)</span><br />
+			1020.00, .Beacon 44002;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>57</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS trigger loop (Timer B)</span>
+		</div>
+	</div>
+	<br />
+	Note that the trigger frequency intended for Timer B, will not be recognised as a trigger for Timer A, or vice-versa.<br />
+	<br />What this arrangement means, is that two OSS installations can co-exist in the same location, and not intefere with each other. For example, imagine that a signal has an OSS associated with it (OSS A), and this has a set speed of 56 km/h. Now imagine, that there is a permanent speed restriction just beyond this signal, and this also has an OSS associated with it (OSS B), with a set speed of 96.56 km/h. In this scenario, safety requirements necessitate both of these OSS installations co-existing in the same place. To accomodate this scenario, the TPWS OSS induction loops (four in total), can be <strong><em>interleaved</em></strong>:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 550px">
+		<div class="codebox-shadow-content">
+			1004.85, .Beacon 44002;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>42</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS A arming loop</span><br />
+			1010.88, .Beacon 44004;<span style="color: #008800">0</span>;;<span style="color: #0000ff">6<strong>47</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS B arming loop</span><br />
+			1020.00, .Beacon 44002;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>52</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS A trigger loop</span><br />
+			1037.00, .Beacon 44004;<span style="color: #008800">0</span>;;<span style="color: #0000ff">6<strong>57</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS B trigger loop</span>
+		</div>
+	</div>
+	<br />
+	In the above example, OSS B is permanently energised (as <tt>.Beacon 44004</tt> commands are used). Whenever a train is travelling above 96.56 km/h while passing through OSS B, the UkTrainSys plugin's Timer B will recognise the OSS B arming frequency, and then the OSS B trigger frequency, and respond accordingly. If the signal associated with OSS A is showing a proceed aspect, then OSS A is not energised, and is never detected.<br />
+	<br />
+	If however, the signal associated with OSS A, <em>is</em> showing a red aspect, then OSS A is energised <em>as well</em>. As you can imagine, if there were only one timer, and one pair of frequencies, then this would complicate things somewhat, and the spacing between the induction loops would be detected incorrectly. However, as each OSS induction loop emits it's own unique frequency, the UkTrainSys plugin will recognise only the OSS A arming and trigger frequencies as relating to Timer A, and only the OSS B frequencies as relating to Timer B. One does not affect the other.<br />
+	<br />
+	The TPWS OSS induction loops can also be <strong><em>nested</em></strong>. In the following example, imagine that the permanent speed restriction just beyond this signal, is set at a higher speed, and that it's associated OSS (OSS B), has a set speed of 120.7 km/h:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 550px">
+		<div class="codebox-shadow-content">
+			0916.30, .Beacon 44004;<span style="color: #008800">0</span>;;<span style="color: #0000ff">6<strong>42</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS A arming loop</span><br />
+			1004.85, .Beacon 44002;<span style="color: #008800">0</span>;1;<span style="color: #0000ff">6<strong>47</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS B arming loop</span><br />
+			1020.00, .Beacon 44002;<span style="color: #008800">0</span>;1;<span style="color: #0000ff">6<strong>57</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS B trigger loop</span><br />
+			1037.00, .Beacon 44004;<span style="color: #008800">0</span>;;<span style="color: #0000ff">6<strong>52</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS OSS A trigger loop</span>
+		</div>
+	</div>
+	<br />
+	Note how in this example, one OSS is contained within the other (nested). As with the first example, each OSS induction loop emits it's own unique frequency, so the UkTrainSys plugin will recognise only the OSS A arming and trigger frequencies as relating to Timer A, and only the OSS B frequencies as relating to Timer B. One does not affect the other<br />
+	<br />
+	<strong><em>TSS:</em></strong><br />
+	<br />
+	Lastly, the Trainstop Sensor System (TSS) TSS induction loops, are also identified by two frequency pairs, one pair associated with Detection A, and the other, with Detection B. One does not affect the other.<br />
+	<br />
+	TSS Detection A, is armed and triggered by the following <span style="color: #0000ff">frequencies</span>:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 550px">
+		<div class="codebox-shadow-content">
+			1004.85, .Beacon 44003;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>62</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS TSS arming loop (Detection A)</span><br />
+			1020.00, .Beacon 44003;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>52</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS TSS trigger loop (Detection A)</span>
+		</div>
+	</div>
+	<br />
+	TSS Detection B, is armed and triggered by the following different <span style="color: #0000ff">frequencies</span>:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 550px">
+		<div class="codebox-shadow-content">
+			1004.85, .Beacon 44003;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>67</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS TSS arming loop (Detection B)</span><br />
+			1020.00, .Beacon 44003;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">6<strong>57</strong>50</span>,&nbsp;&nbsp;<span style="color: #888888">; TPWS TSS trigger loop (Detection B)</span>
+		</div>
+	</div>
+	<br />
+	<br />
+	<br />
+	<a id="beacon-types-legacy-behaviour"></a>
+	<strong><span style="text-decoration: underline">Beacon types and legacy behaviour</span></strong><br />
+	<br />
+	The UkTrainSys plugin is also backwards compatible with beacon commands intended for use with Simon Gathercole's previous generation of C++ Windows-only plugins for BVE 4. Developers creating new routes for openBVE are encouraged to use the new functionality and behaviour previously mentioned, rather than using the old, legacy behaviour, which is not as realistic or flexible.<br />
+	<br />
+	<strong><span style="text-decoration: underline">Beacon types and the Automatic Power Control system (legacy behaviour)</span></strong><br />
+	<br />
+	<strong><em>Beacon 20 <span style="color: #ff0000">(legacy behaviour - deprecated)</span>:</em></strong><br />
+	<br />
+	The UkTrainSys plugin supports a legacy behaviour for this beacon. You can use a single <tt>.Beacon 20</tt> command to communicate both the location of the first set of APC magnets, as well as the distance to the second set of APC magnets. This does not, however, allow for the actual neutral section to be simulated, or for driving backwards through a neutral section with the Automatic Power Control system still working. <em>For this, you need to use the new behaviour, which was described earlier on</em>.<br />
+	<br />
+	To use only the simplified legacy behaviour, take the following example:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 200px">
+		<div class="codebox-shadow-content">
+			.Beacon 20;<span style="color: #008800">0</span>;;<span style="color: #ff0000">46</span>
+		</div>
+	</div>
+	<br />
+	If relying upon the legacy behaviour, this <tt>.Beacon 20</tt> command should be located where the APC magnets are required, before the neutral section <em>only</em>. The <tt>Data</tt> value of <span style="color: #ff0000">46</span> tells the UkTrainSys plugin the distance (in metres) to the second pair of APC magnets, and when the train reaches the correct location, the circuit breaker will re-close.<br />
+	<br />
+	Note: the <tt><span style="color: #008800">BeaconStructureIndex</span></tt> value will depend upon what objects you have loaded within your route file; please see the <a href="http://openbve.trainsimcentral.co.uk/develop/index.html">Developing for openBVE</a> section of the official openBVE homepage for more information.<br />
+	<br />
+	<strong><span style="text-decoration: underline">Beacon types and the Automatic Warning System (legacy behaviour)</span></strong><br />
+	<br />
+	The UkTrainSys plugin also supports the old AWS behaviour modelled in Simon Gathercole's range of BVE4 plugins, although <em>this legacy behaviour is less flexible and not as realistic, and it's use is not encouraged in new routes designed for openBVE</em>.<br />
+	<br />
+	<strong><em>Beacon 44000 <span style="color: #ff0000">(legacy behaviour - deprecated)</span>:</em></strong><br />
+	<br />
+	This beacon represents an AWS magnet associated with a signal. When the section referenced by the <tt>Section</tt> parameter of a
+	<tt>.Beacon 44000</tt> command has an aspect of 0 (i.e. the section is occupied by a train), passing over this beacon will trigger an
+	AWS warning within the cab. Use the beacon as follows:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 200px">
+		<div class="codebox-shadow-content">
+			.Beacon 44000;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>
+		</div>
+	</div>
+	<br />
+	The <tt>Section</tt> parameter of <span style="color: #ff0000">1</span>, references the next section ahead, and if section
+	<span style="color: #ff0000">1</span> is occupied, an AWS warning is triggered.<br />
+	<br />
+	Note: the <tt><span style="color: #008800">BeaconStructureIndex</span></tt> value will depend upon
+	what objects you have loaded within your route file; please see the
+	<a href="http://openbve.trainsimcentral.co.uk/develop/index.html">Developing for openBVE</a> section of the official openBVE homepage
+	for more information.<br />
+	<br />
+	<strong><em>Beacon 44001 <span style="color: #ff0000">(legacy behaviour - deprecated)</span>:</em></strong><br />
+	<br />
+	This beacon represents a permanently energised AWS magnet not associated with a signal, but rather, for example, a permissible speed
+	advanced warning indicator board. Use the beacon as follows:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 200px">
+		<div class="codebox-shadow-content">
+			.Beacon 44001;<span style="color: #008800">0</span>
+		</div>
+	</div>
+	<br />
+	No section parameter is required here, as <tt>.Beacon 44001</tt> will always trigger an AWS warning, regardless.<br />
+	<br />
+	Note: the <tt><span style="color: #008800">BeaconStructureIndex</span></tt> value will depend upon
+	what objects you have loaded within your route file; please see the
+	<a href="http://openbve.trainsimcentral.co.uk/develop/index.html">Developing for openBVE</a> section of the official openBVE homepage
+	for more information.<br />
+	<br />
+	<br />
+	<strong><span style="text-decoration: underline">Beacon types and the Train Protection and Warning System (legacy behaviour)</span></strong><br />
+	<br />
+	The UkTrainSys plugin also supports the old TPWS behaviour modelled in Simon Gathercole's range of BVE4 plugins, although <em>this legacy behaviour is less flexible and not as realistic, and it's use is not encouraged in new routes designed for openBVE</em>.<br />
+	<br />
+	<strong><em>Beacon 44002 <span style="color: #ff0000">(legacy behaviour - deprecated)</span>:</em></strong><br />
+	<br />
+	In the case of standard TPWS, this beacon should be located as the final loop amongst the set of two OSS induction loops. In the case of TPWS+ (Plus), this beacon should be located as the last of the first pair of OSS induction loops, <em>and</em> the last of the second pair of OSS induction loops. When the section referenced by the <tt>Section</tt> parameter of this <tt>.Beacon 44002</tt> command has an aspect of 0 (i.e. the section is occupied by a train), passing over this beacon will trigger a TPWS OSS Brake Demand if the train is travelling above the permitted speed when passing over the beacon. Use the beacon as follows:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 200px">
+		<div class="codebox-shadow-content">
+			.Beacon 44002;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>;<span style="color: #0000ff">56</span>
+		</div>
+	</div>
+	<br />
+	The <tt>Section</tt> parameter of <span style="color: #ff0000">1</span>, references the next section ahead, and if section
+	<span style="color: #ff0000">1</span> is occupied, passing over this beacon will trigger a TPWS OSS Brake Demand if the train is 
+	travelling above the permitted speed when passing over the beacon.<br />
+	<br />
+	The <tt>Data</tt> parameter of <span style="color: #0000ff">56</span> defines the permitted speed in (kilometres per hour) when passing over this TPWS Overspeed Sensor, when the section referenced by the <tt>Section</tt> parameter has an aspect of 0.<br />
+	<br />
+	If a TPWS+ (Plus) installation is being simulated, then the first occurance of the <tt>.Beacon 44002</tt> command should have a higher speed than the second <tt>.Beacon 44002</tt> command.<br />
+	<br />
+	Note: the <tt><span style="color: #008800">BeaconStructureIndex</span></tt> value will depend upon
+	what objects you have loaded within your route file; please see the
+	<a href="http://openbve.trainsimcentral.co.uk/develop/index.html">Developing for openBVE</a> section of the official openBVE homepage
+	for more information.<br />
+	<br />
+	<strong><em>Beacon 44003 <span style="color: #ff0000">(legacy behaviour - deprecated)</span>:</em></strong><br />
+	<br />
+	This beacon represents a TPWS Train Stop Sensor induction loop, associated with a signal. When the section referenced by the
+	<tt>Section</tt> parameter of a <tt>.Beacon 44003</tt> command has an aspect of 0 (i.e. the section is occupied by a train), passing 
+	over this beacon will trigger a TPWS TSS Brake Demand. Use the beacon as follows:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 200px">
+		<div class="codebox-shadow-content">
+			.Beacon 44003;<span style="color: #008800">0</span>;<span style="color: #ff0000">1</span>
+		</div>
+	</div>
+	<br />
+	The <tt>Section</tt> parameter of <span style="color: #ff0000">1</span>, references the next section ahead, and if section
+	<span style="color: #ff0000">1</span> is occupied, passing over this beacon will trigger a TPWS TSS Brake Demand.<br />
+	<br />
+	Note: the <tt><span style="color: #008800">BeaconStructureIndex</span></tt> value will depend upon what objects you have loaded within your route file; please see the <a href="http://openbve.trainsimcentral.co.uk/develop/index.html">Developing for openBVE</a> section of the official openBVE homepage for more information.<br />
+	<br />
+	<strong><em>Beacon 44004 <span style="color: #ff0000">(legacy behaviour - deprecated)</span>:</em></strong><br />
+	<br />
+	For legacy behaviour, you can use this beacon as follows:<br />
+	<br />
+	<div class="codebox-shadow" style="width: 200px">
+		<div class="codebox-shadow-content">
+			.Beacon 44004;<span style="color: #008800">0</span>;;<span style="color: #0000ff">56</span>
+		</div>
+	</div>
+	<br />
+	No section parameter is required here, as <tt>.Beacon 44004</tt> will always trigger a TPWS OSS Brake Demand if the train is
+	travelling above the permitted speed when passing over the beacon.<br />
+	<br />
+	The <tt>Data</tt> parameter of <span style="color: #0000ff">56</span> defines the permitted speed (in kilometres per hour) when passing over this TPWS Overspeed Sensor.<br />
+	<br />
+	Note: the <tt><span style="color: #008800">BeaconStructureIndex</span></tt> value will depend upon
+	what objects you have loaded within your route file; please see the
+	<a href="http://openbve.trainsimcentral.co.uk/develop/index.html">Developing for openBVE</a> section of the official openBVE homepage
+	for more information.<br />
+	<br />
+</div>
+<div>
+	<a id="config-file"></a>
+	<h3>The UkTrainSys configuration file</h3>
+	The UkTrainSys plugin makes use of a configuration file, which can be used to set various options. If the plugin cannot find it's configuration file, then a new file is created with default values assigned. This will always have a filename which is comprised of the assembly name, with a <em>.cfg</em> extension added (e.g. <em>UkTrainSys.cfg</em>).<br />
+	<br />
+	Here is a summary of the options which you can set:<br />
+	<br />
+	<strong>The [Options] section</strong><br />
+	<br />
+	<span style="color: #ff0000">DebugMode = </span><br />
+	<br />
+	Whether or not the plugin should create a <tt>Debug.log</tt> file in the same folder where the plugin resides, and display debug information via openBVE's F10 debug screen. This is a <span style="color: #008800">boolean</span> value (<em>True</em> or <em>False</em>). The default value is <em>False</em>.<br />
+	<br />
+	<strong>The [AiSupport] section</strong><br />
+	<br />
+	<span style="color: #ff0000">Enabled = </span><br />
+	<br />
+	Whether or not the plugin should support openBVE's AI driver in operating the systems simulated by the UkTrainSys plugin. This is is a <span style="color: #008800">boolean</span> value (<em>True</em> or <em>False</em>). The default value is <em>True</em>.<br />
+	<br />
+	<span style="color: #ff0000">MaximumDraActivationDistance = </span><br />
+	<br />
+	The maximum distance in metres from the upcoming signal showing a red aspect, below which the AI Support will activate the DRA. This can be either an <span style="color: #008800">integer</span> or a <span style="color: #008800">floating point</span> value. The default value is <em>150</em> metres.<br />
+	<br />
+	<strong>Options common to all <em>systems</em></strong><br />
+	<br />
+	<span style="color: #ff0000">Enabled = </span><br />
+	<br />
+	Whether or not a particular system should be enabled. This is a <span style="color: #008800">boolean</span> value (<em>True</em> or <em>False</em>). The default value is <em>False</em> for all systems. If a particular train does have a particular system installed, then that system can be enabled by using this option.<br />
+	<br />
+	<strong>Options common to <em>power supplies</em></strong><br />
+	<br />
+	<span style="color: #ff0000">MaximumOutputVoltage = </span><br />
+	<br />
+	The maximum voltage which the power supply can provide, measured in <em>Volts</em>. This can be either an <span style="color: #008800">integer</span> or a <span style="color: #008800">floating point</span> value. The default value varies according to the power supply in question.<br />
+	<br />
+	<span style="color: #ff0000">MaximumOutputCurrent = </span><br />
+	<br />
+	The maximum current which the power supply can provide (current rating), measured in <em>Amperes</em>. If the ampere load on the power supply exceeds this value, then the power supply circuit breaker will trip open. This can be either an <span style="color: #008800">integer</span> or a <span style="color: #008800">floating point</span> value. The default value varies according to the power supply in question.<br />
+	<br />
+	<strong>Options common to electrical systems</strong><br />
+	<br />
+	<span style="color: #ff0000">RequiredVoltage = </span><br />
+	<br />
+	The voltage requirements for a particular system (and maximum voltage rating), measured in <em>Volts</em>. This can be either an <span style="color: #008800">integer</span> or a <span style="color: #008800">floating point</span> value. The default value varies according to the system in question.<br />
+	<br />
+	<span style="color: #ff0000">RequiredCurrent = </span><br />
+	<br />
+	The current requirements for a particular system (and maximum current rating), measured in <em>Amperes</em>. This can be either an <span style="color: #008800">integer</span> or a <span style="color: #008800">floating point</span> value. The default value varies according to the system in question.<br />
+	<br />
+	<strong>The [InterlockManager] section</strong><br />
+	<br />
+	This system has no options to set, apart from the options common to all systems (see above).<br />
+	<br />
+	<strong>The [Battery] section</strong><br />
+	<br />
+	<span style="color: #ff0000">DischargeRate = </span><br />
+	<br />
+	The rate at which the battery will discharge when a load is placed upon it, measured in <em>Amperes per second</em>. This is a <span style="color: #008800">floating point</span> value. The default value is <em>0.001</em> amperes per second.<br />
+	<br />
+	<strong>The [Overhead] section</strong><br />
+	<br />
+	<span style="color: #ff0000">MaximumInputVoltage = </span><br />
+	<br />
+	The maximum voltage which the overhead supply can handle from the overhead line, measured in <em>Volts</em>. This can be either an <span style="color: #008800">integer</span> or a <span style="color: #008800">floating point</span> value. The default value is <em>29000</em> volts.<br />
+	<br />
+	<span style="color: #ff0000">MaximumInputCurrent = </span><br />
+	<br />
+	The maximum current which can be drawn from the overhead line, measured in <em>Amperes</em>. This can be either an <span style="color: #008800">integer</span> or a <span style="color: #008800">floating point</span> value. The default value is <em>17500</em> volts.<br />
+	<br />
+	<strong>The [Diesel] section</strong><br />
+	<br />
+	<span style="color: #ff0000">MotorStartDelay = </span><br />
+	<br />
+	The delay before the starter motor sound begins looping after the motor has spun up, measured in <em>milliseconds</em>. This is an <span style="color: #008800">integer</span> value. The default value is <em>400</em> milliseconds.<br />
+	<br />
+	<span style="color: #ff0000">EngineStartDelay = </span><br />
+	<br />
+	The delay before the engine idle sound begins looping, after the engine has successfully started, and after which the starter button integral lamp extinguishes, measured in <em>milliseconds</em>. This is an <span style="color: #008800">integer</span> value. The default value is <em>2500</em> milliseconds.<br />
+	<br />
+	<span style="color: #ff0000">EngineRunDownDelay = </span><br />
+	<br />
+	The delay before the engine has completely stopped after a normal shutdown, measured in <em>milliseconds</em>. This is an <span style="color: #008800">integer</span> value. The default value is <em>2000</em> milliseconds.<br />
+	<br />
+	<span style="color: #ff0000">EngineStallDelay = </span><br />
+	<br />
+	The delay before the engine has completely stopped after stalling, measured in <em>milliseconds</em>. This is an <span style="color: #008800">integer</span> value. The default value is <em>2000</em> milliseconds.<br />
+	<br />
+	<span style="color: #ff0000">StallProbability = </span><br />
+	<br />
+	The probability of the engine stalling during engine startup, as a <em>percentage</em>. This is an <span style="color: #008800">integer</span> value ranging from <em>0 to 100</em>. The default value is <em>25</em> percent.<br />
+	<br />
+	<strong>The [Aws] section</strong><br />
+	<br />
+	<span style="color: #ff0000">CancelTimeout = </span><br />
+	<br />
+	The AWS warning horn cancellation timeout period, measured in <em>milliseconds</em>. This is an <span style="color: #008800">integer</span> value. The default value is <em>3000</em> milliseconds.<br />
+	<br />
+	<strong>The [Vigilance] section</strong><br />
+	<br />
+	<span style="color: #ff0000">InactivityTimeout = </span><br />
+	<br />
+	The Vigilance device driver inactivity timeout period, measured in <em>milliseconds</em>. This is an <span style="color: #008800">integer</span> value. The default value is <em>60000</em> milliseconds.<br />
+	<br />
+	<span style="color: #ff0000">CancelTimeout = </span><br />
+	<br />
+	The Vigilance device warning beep acknowledgement timeout period, measured in <em>milliseconds</em>. This is an <span style="color: #008800">integer</span> value. The default value is <em>7000</em> milliseconds.<br />
+	<br />
+	<strong>The [Tpws] section</strong><br />
+	<br />
+	<span style="color: #ff0000">BrakesAppliedTimeout = </span><br />
+	<br />
+	The timeout period which must expire before the brakes can be released after the train has been brought to a halt, following a TPWS Brake Demand. This value is measured in <em>milliseconds</em>. This is an <span style="color: #008800">integer</span> value, with the default value being <em>60000</em> milliseconds.<br />
+	<br />
+	<span style="color: #ff0000">TssOverrideTimeout = </span><br />
+	<br />
+	The TPWS TSS Override timeout period (used when passing a signal at danger with a signaller's permission), measured in <em>milliseconds</em>. This is an <span style="color: #008800">integer</span> value. The default value is <em>20000</em> milliseconds.<br />
+	<br />
+	<span style="color: #ff0000">OssTimeout = </span><br />
+	<br />
+	The TPWS OSS timeout period, measured in <em>milliseconds</em>. This is an <span style="color: #008800">integer</span> value. The default value is <em>974</em> milliseconds, which is suitable for passenger trains. For freight trains, specify a value of <em>1218</em> milliseconds instead.<br />
+	<br />
+	<span style="color: #ff0000">IndicatorBlinkRate = </span><br />
+	<br />
+	The TPWS Brake Demand indicator lamp blink rate, measured in <em>milliseconds</em>. This is an <span style="color: #008800">integer</span> value. The default value is <em>300</em> milliseconds.<br />
+	<br />
+	<strong>The [Dra] section</strong><br />
+	<br />
+	This system has no options to set, apart from the options common to electrical systems and all systems (see above).<br />
+	<br />
+	<strong>The [Headlights] section</strong><br />
+	<br />
+	This system has no options to set, apart from the options common to electrical systems and all systems (see above).<br />
+	<br />
+	<strong>The [Taillights] section</strong><br />
+	<br />
+	This system has no options to set, apart from the options common to electrical systems and all systems (see above).<br />
+	<br />
+	<strong>The [Blower] section</strong><br />
+	<br />
+	<span style="color: #ff0000">Delay = </span><br />
+	<br />
+	The delay before the in-cab blower (fan) loop sound begins, measured in <em>milliseconds</em>. This allows the blower spinning up sound to play before the looping sound begins. This is an <span style="color: #008800">integer</span> value. The default value is <em>1700</em> milliseconds.<br />
+	<br />
+	<strong>The [Pantograph] section</strong><br />
+	<br />
+	<span style="color: #ff0000">UpResetTimeout = </span><br />
+	<br />
+	The time taken to raise the pantograph from the lowered position, measured in <em>milliseconds</em>. This is an <span style="color: #008800">integer</span> value. The default value is <em>5000</em> milliseconds.<br />
+	<br />
+	<span style="color: #ff0000">PantographLocation = </span><br />
+	<br />
+	The distance from the front of the train to the pantograph head, measured in <em>metres</em>. This can be either an <span style="color: #008800">integer</span> or a <span style="color: #008800">floating point</span> value. The default value is <em>0</em> metres.<br />
+	<br />
+	<strong>The [Tapchanger] section</strong> <span style="color: #0000ff"><em>(unfinished)</em></span><br />
+	<br />
+	This system has no options to set, apart from the options common to electrical systems and all systems (see above).<br />
+	<br />
+	<strong>The [Apc] section</strong><br />
+	<br />
+	<span style="color: #ff0000">ApcReceiverLocation = </span><br />
+	<br />
+	The distance from the front of the train (beacon receiver) to the location of the bogie-mounted Automatic Power Control receiver, measured in <em>metres</em>. APC is a system which automatically cuts power to the on-board traction power equipment while passing a neutral section in the overhead line. This allows the APC receiver to be located nearer to the pantograph. This can be either an <span style="color: #008800">integer</span> or a <span style="color: #008800">floating point</span> value. The default value is <em>0</em> metres.<br />
+	<br />
+	<strong>The [Horn] section</strong><br />
+	<br />
+	<span style="color: #ff0000">CentreTimeout = </span><br />
+	<br />
+	The timeout period before the horn lever returns to the centre position after the horn is blown, measured in <em>milliseconds</em>. This is an <span style="color: #008800">integer</span> value. The default value is <em>1000</em> milliseconds.<br />
+	<br />
+</div>
+<div>
+	<a id="information-programmers"></a>
+	<h3>Information for programmers</h3>
+	<strong>Description of how this plugin works:</strong><br />
+	<br />
+	This plugin features multiple safety/operational system classes, multiple power supply classes, a power supply manager class, an interlock manager class, a startup/self-test manager, and an offset beacon manager class, a cab controls class, a sound manager class, and AI guard class.<br />
+	<br />
+	<a id="information-programmers-general-design"></a>
+	<strong>General design principle summary:</strong>
+	<ul>
+		<li>Classes representing functional electrical systems have power states, operational states (used as failure modes), and safety systems have a safety state. These classes can be instantiated.</li>
+		<li>Systems are continually updated via calls in the Elapse() method, although inner processing is carried out based upon conditions and states.</li>
+		<li>Safety state changes are initiated via methods, usually in the form of a command relevant to the system, called either when the host application issues an event, or by other systems. These methods can ensure that certain state changes are conditional and safe.</li>
+		<li>A system can read but not modify another system's state(s) directly, so the provided methods must be used, unless the state in question is managed by an outside manager-style class. It is nevertheless good practice to call a suitable method when interacting with a system.</li>
+		<li>Manager-style classes are static, and cannot be instantiated. They can alter relevant states of managed systems.</li>
+	</ul>
+	<br />
+	<a id="information-programmers-cab-controls"></a>
+	<strong>Cab Controls class:</strong><br />
+	<br />
+	This class stores the state of the "physical" in-cab controls (i.e. buttons, switches, handles, and so-on). The states within this class, are changed via the KeyDown(), KeyUp(), SetPower(), SetBrake(), SetReverser(), and DoorChange() methods, as initiated by the host application. The cab controls class is also responsible for determining the state of panel elements which represent physical controls. Safety system classes for example, can also monitor the states within the cab controls class if required.<br />
+	<br />
+	<a id="information-programmers-safety-systems"></a>
+	<strong>Safety System classes:</strong><br />
+	<br />
+	Each safety system class derives from the abstract ElectricalSystem class. All electrical systems connect directly to the power supply manager, have required voltage and current values, circuit breakers which can be opened or closed, as well as "operative states", which can be used to determine failure modes (in future).<br />
+	<br />
+	Safety system classes do not directly control the power and brake handle positions. Rather, they issue "Demands" and "Requests" to the interlock manager class, which itself determines when to lock the brakes on, or cut-off traction power, and also when the power and brake interlocks can be released. Hence, a safety system class can <em>demand</em> that the interlock manager apply the brakes or cut-off traction power immediately, but can only <em>request</em> that the brakes be released or traction power be restored.<br />
+	<br />
+	Each safety system class has states, and an Update() method. The implementation within the Update() method of a safety system class defines its behaviour based upon the current state of the safety system, and is called once during each Elapse() call, as initiated by the host application. Safety system classes also have non-inherited methods which should be called via the the SetReverser(), SetBrake(), SetPower(), SetBeacon(), KeyDown() and KeyUp() methods, to set safety system states when events from the host application are triggered. Safety systems also implement a Reset() method, with the implied action carried out unconditionally, so should be used only where necessary, however the interlock manager will still retain control of the brake and traction interlocks regardless. The inherited Enable() method should be used if a train is to be equipped with a particular safety system, according to the configuration file. Safety system classes can also check the state of any relevant controls in the cab controls class, and update themselves depending upon the states of those relevant controls, if necessary. Each safety system class has a Reinitialise() method, which should be called via the Initialise() method, as initiated by the host application. This sets the safety system to a default state upon loading a route, or jumping to a station.<br />
+	<br />
+	Safety system classes directly control the state of relevant in-cab indications and playback of sounds (via the panel[] array and sound manager).<br />
+	<br />
+	If safety systems need to know the state of other safety systems, then this can be accomplished in two ways. Firstly, the state of a safety system is available via internal read-only properties. Secondly, safety systems can communicate with each other using events. For example, the Automatic Warning System class publishes an event which occurs whenever the AWS reset button has been released. The Vigilance Device, along with the Train Protection and Warning System, subscribe to this event, as they are both tied to the Automatic Warning System. If a safety system needs to change the state of another safety system, it should call an appropriate method.<br />
+	<br />
+	<a id="information-programmers-interlock-manager"></a>
+	<strong>Interlock Manager:</strong><br />
+	<br />
+	The interlock manager class has direct control over forcing the brakes to be applied, cutting off traction power, and determining when the brakes can be released, and traction power restored. Safety system classes can issue brake demands to the interlock manager via its DemandBrakeApplication() method, or demand that traction power be cutoff via the DemandTractionPowerCutoff() method. The Interlock Manager will always act immediately upon these demands. However, safety systems can only make requests for the brake and power interlocks to be released again, via the RequestBrakeReset() and RequestTractionPowerReset() methods. If such an interlock reset is requested, the interlocks will only be released if certain Interlock Manager rules and behaviours permit it at the time of the request. If the reset is not permitted at the time, then the request remains pending, and will be granted whenever the prerequisite conditions are eventually met. The Interlock Manager also checks the states of safety system classes or the cab controls class where necessary, to determine whether a brake or traction power interlock should be released.<br />
+	<br />
+	<a id="information-programmers-power-supplies"></a>
+	<strong>Power supply classes:</strong><br />
+	<br />
+	<strong><em>Note:</em></strong> This feature is more for future use, if and when openBVE supports clickable 3D cab controls, as such things as circuit breaker panels can be simulated then.<br />
+	<br />
+	Power supply simulation has three main aspects; the power supply manager, a range of power supplies, and individual electrical systems. Power is primarily handled via the power supply manager class. Electrical systems are first "connected" to the power supply manager, and then a single power supply can be connected to the power supply manager at any given time, too. The power supply manager monitors all connected electrical systems to determine their total voltage and current requirements. It also monitors the connected power supply to check whether it is able to supply enough current. If the power supply becomes overloaded or otherwise has its circuit breaker tripped open, the power supply manager sets the power state of each connected electrical system accordingly, so they no longer function until power is restored.<br />
+	<br />
+	Each power supply has a maximum voltage and current rating, and monitors the power requirements of the power supply manager. If the power supply manager current demand exceeds the available amperage of the power supply in question, the power supply will trip open its own circuit breaker in the event of an overload condition. If a power supply's circuit breaker trips, it must be manually closed before the power supply will provide power again.<br />
+	<br />
+	Train developers should configure power supplies to always have a sufficiently high current rating in all circumstances, until it becomes more practical to simulate the ability to open and close individual circuit breakers by using the mouse to interact with a 3D cab.<br />
+	<br />
+	<a id="information-programmers-sound-playback"></a>
+	<strong>Sound playback:</strong><br />
+	<br />
+	The sound manager class provides Play(), Stop() and IsPlaying() methods, and deals with the sound handles passed from the host application. Calling the Play() method with a specified sound index, starts playback of the sound, either once only, or looped continuously, with a specified pitch and volume.<br />
+	<br />
+	If a sound is played without looping, and a subsequent call using the same sound index is made, but the sound hasn't finished playing and neither the pitch or volume are different, the sound is stopped and then played again from the start. If playback of a non-looping sound index has not finished yet, and another play request is made with the same sound index, but the the pitch or volume is different this time, then the sound continues playing with the new pitch or volume.<br />
+	<br />
+	If a sound index is looped, subsequent calls to the Play() method allow for the volume and pitch to be changed, without sound playback stopping and starting again.<br />
+	<br />
+	The IsPlaying() method returns a boolean indicating whether or not a specified sound index is currently playing.<br />
+	<br />
+	<a id="information-programmers-offset-beacon-manager"></a>
+	<strong>Offset Beacon Receiver Manager class:</strong><br />
+	<br />
+	This class stores information about certain types of beacon when the SetBeacon() method is called. Specifically handled, are beacons for which in reality, the beacon reciever should not be located at the front of the train, which is where the openBVE "beacon receiver" is located. The offset beacon receiver manager can assume the role of issuing trigger points to systems which respond to these beacons. This allows a train with an offset beacon receiver to travel backwards over beacon locations, with the action associated with the beacon, being triggered at the correct location, as though the actual beacon receiver were not at the front of the train.<br />
+	<br />
+	A new beacon is added to the offset beacon receiver manager via the AddBeacon() method (which is done via the SetBeacon() method, as initiated by the host application when passing a beacon location). A new beacon is only added if the train is travelling forwards at the time that AddBeacon() is called. Several pieces of information are stored - the actual location of the beacon, the beacon type, the beacon's optional data, and a beacon receiver offset value. These values are used to trigger an action associated with the beacon, at a location which takes the offset beacon reciever location into account, whether travelling forwards, or backwards. When the train is travelling backwards, if the actual beacon receiver passes the location of a stored beacon, then the beacon information is deleted from the stored beacon array, so that it can be registered again, if the train later passes the beacon while travelling forwards.<br />
+	<br />
+	When the Reinitialise() method is called, i.e. when jumping to a station, any beacons stored by the offset beacon receiver manager are deleted. For a beacon to be registered again, it must be added via the SetBeacon() method, when the train is travelling forwards.<br />
+	<br />
+	<a id="information-programmers-source-code"></a>
+	<strong>Source Code:</strong><br />
+	<br />
+	For the source code, please see the "source" folder which was included within the <em>UkTrainSys</em> archive which you downloaded,
+	where you can find the solution and C# files. I recommend using <a href="http://www.icsharpcode.net/opensource/sd/">SharpDevelop</a>
+	as your IDE. For the latest version of the plugin, source code, documentation, and configuration files for openBVE trains, please visit <a href="http://railsimroutes.net/libraries/uktrainsys/">http://railsimroutes.net/libraries/uktrainsys/</a>.<br />
+	<br />
+</div>
+<div>
+	<h3></h3>
+	Anthony Bowden<br />
+	23rd December, 2010<br />
+	--<br />
+	<a href="http://railsimroutes.net/">http://railsimroutes.net</a><br />
+	<br />
+	<br />
+	<br />
+</div>
+</body>
+</html>

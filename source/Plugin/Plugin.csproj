@@ -1,0 +1,178 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{D49DB8CF-5EB9-4AEA-A749-F379E8D34768}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Plugin</RootNamespace>
+    <AssemblyName>UkTrainSys</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SourceAnalysisOverrideSettingsFile>C:\Documents and Settings\Administrator\Application Data\ICSharpCode/SharpDevelop3.0\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <BaseAddress>4194304</BaseAddress>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+  <ItemGroup>
+    <Reference Include="OpenBveApi">
+      <HintPath>..\..\..\..\..\..\..\Simulations\openBVE %28Dev%29\OpenBveApi.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AiGuard.AiGuardStates.cs">
+      <DependentUpon>AiGuard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AtpSafetyStates.cs">
+      <DependentUpon>AutomaticTrainProtection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AutomaticPowerControl.ApcStates.cs">
+      <DependentUpon>AutomaticPowerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AutomaticPowerControl.cs">
+    </Compile>
+    <Compile Include="AiGuard.cs">
+    </Compile>
+    <Compile Include="AutomaticTrainProtection.cs" />
+    <Compile Include="AutomaticWarningSystem.ResetAcknowledgementStates.cs">
+      <DependentUpon>AutomaticWarningSystem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AutomaticWarningSystem.SafetyStates.cs">
+      <DependentUpon>AutomaticWarningSystem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AutomaticWarningSystem.SunflowerStates.cs">
+      <DependentUpon>AutomaticWarningSystem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Battery.cs" />
+    <Compile Include="CabControls.AiArmInitialisationStates.cs">
+      <DependentUpon>CabControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DieselEngine.cs" />
+    <Compile Include="DieselEngine.DieselEngineStates.cs">
+      <DependentUpon>DieselEngine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DieselEngine.StarterMotorStates.cs">
+      <DependentUpon>DieselEngine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OffsetBeaconReceiverManager.PreviousBeacon.cs">
+      <DependentUpon>OffsetBeaconReceiverManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OffsetBeaconReceiverManager.cs" />
+    <Compile Include="Blower.cs">
+    </Compile>
+    <Compile Include="Blower.BlowerStates.cs">
+      <DependentUpon>Blower.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CabControls.AcLocoPowerHandleStates.cs">
+      <DependentUpon>CabControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CabControls.AiDriverLeftHandStates.cs">
+      <DependentUpon>CabControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CabControls.AiDriverRightHandStates.cs">
+      <DependentUpon>CabControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CabControls.cs">
+    </Compile>
+    <Compile Include="CabControls.HeadlightControlStates.cs">
+      <DependentUpon>CabControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CabControls.HornStates.cs">
+      <DependentUpon>CabControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CabControls.ReverserStates.cs">
+      <DependentUpon>CabControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CabControls.TaillightControlStates.cs">
+      <DependentUpon>CabControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CabControls.WiperControlStates.cs">
+      <DependentUpon>CabControls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ElectricalSystem.cs" />
+    <Compile Include="GenericSystem.cs" />
+    <Compile Include="Plugin.AiSoundHornStates.cs">
+      <DependentUpon>Plugin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin.AiSupportFeature.cs">
+      <DependentUpon>Plugin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin.CfgParser.cs">
+      <DependentUpon>Plugin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DriverReminderAppliance.SafetyStates.cs">
+      <DependentUpon>DriverReminderAppliance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperativeStates.cs" />
+    <Compile Include="OverheadPowerSupply.cs" />
+    <Compile Include="PanelIndices.cs" />
+    <Compile Include="Pantograph.PantographStates.cs">
+      <DependentUpon>Pantograph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin.cs" />
+    <Compile Include="DriverReminderAppliance.cs">
+    </Compile>
+    <Compile Include="Plugin.Functions.cs">
+      <DependentUpon>Plugin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InterlockManager.cs">
+    </Compile>
+    <Compile Include="HeadLights.cs">
+    </Compile>
+    <Compile Include="Pantograph.cs">
+    </Compile>
+    <Compile Include="PowerStates.cs" />
+    <Compile Include="PowerSupply.cs" />
+    <Compile Include="PowerSupplyManager.cs">
+    </Compile>
+    <Compile Include="StartupSelfTestManager.SequenceStates.cs">
+      <DependentUpon>StartupSelfTestManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Taillights.cs" />
+    <Compile Include="TapChanger.cs" />
+    <Compile Include="TrainProtectionWarningSystem.SafetyStates.cs">
+      <DependentUpon>TrainProtectionWarningSystem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VigilanceDevice.SafetyStates.cs">
+      <DependentUpon>VigilanceDevice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SoundIndices.cs" />
+    <Compile Include="SoundManager.cs">
+    </Compile>
+    <Compile Include="StartupSelfTestManager.cs">
+    </Compile>
+    <Compile Include="AutomaticWarningSystem.cs">
+    </Compile>
+    <Compile Include="SystemBreakerStates.cs" />
+    <Compile Include="TrainProtectionWarningSystem.cs">
+    </Compile>
+    <Compile Include="VigilanceDevice.cs">
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+</Project>
