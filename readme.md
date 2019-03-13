@@ -5,7 +5,7 @@ This repository contains a **mirror** of Railsimroutes' UK Train System (UkTrain
 
 ## Downloads
 
-[to be filled in]
+Downloads can be found on [the Release page](https://github.com/joeyfoo/UkTrainSys/releases).
 
 -----
 
